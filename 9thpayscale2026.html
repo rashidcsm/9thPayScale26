@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>৯ম জাতীয় বেতন স্কেল ২০২৬</title>
+<style>
+  :root{
+    --primary:#2563eb;
+    --primary-dark:#1e40af;
+    --primary-light:#dbeafe;
+    --accent:#f59e0b;
+    --success:#10b981;
+    --danger:#ef4444;
+    --bg:#eef2f9;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --shadow:0 4px 20px rgba(15,23,42,.06);
+    --shadow-lg:0 10px 40px rgba(37,99,235,.12);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220;
+      --card:#111a2e;
+      --text:#e6edf7;
+      --muted:#94a3b8;
+      --border:#1f2a44;
+      --primary-light:#16233f;
+      --shadow:0 4px 20px rgba(0,0,0,.4);
+      --shadow-lg:0 10px 40px rgba(37,99,235,.25);
+    }
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:'SolaimanLipi','Noto Sans Bengali','Hind Siliguri',system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.5;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    transition:background .3s ease,color .3s ease;
+  }
+
+  /* ---------- হেডার ---------- */
+  header{
+    position:relative;
+    background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 60%,#312e81 100%);
+    color:#fff;
+    padding:26px 16px 22px;
+    text-align:center;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute;
+    top:-60px;right:-60px;
+    width:180px;height:180px;
+    background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);
+    border-radius:50%;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    bottom:-80px;left:-40px;
+    width:200px;height:200px;
+    background:radial-gradient(circle,rgba(245,158,11,.25),transparent 70%);
+    border-radius:50%;
+  }
+  header h1{
+    margin:0;
+    font-size:clamp(17px,4.5vw,22px);
+    font-weight:800;
+    letter-spacing:.3px;
+    position:relative;
+    z-index:1;
+    text-shadow:0 2px 6px rgba(0,0,0,.15);
+  }
+  header .badge-year{
+    display:inline-block;
+    margin-top:8px;
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.25);
+    padding:4px 14px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- ইনফো কার্ড ---------- */
+  .info-wrap{
+    max-width:640px;
+    margin:-16px auto 0;
+    padding:0 16px;
+    position:relative;
+    z-index:2;
+  }
+  .info-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    box-shadow:var(--shadow);
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .info-avatar{
+    width:42px;height:42px;
+    flex:0 0 auto;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),#7c3aed);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;
+    box-shadow:0 4px 12px rgba(37,99,235,.35);
+  }
+  .info-text{min-width:0;}
+  .info-text .name{font-weight:700;font-size:14px;}
+  .info-text .role{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  /* ---------- কন্টেইনার ---------- */
+  .container{
+    padding:18px 16px 40px;
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  /* ---------- পিকার ---------- */
+  .picker-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-bottom:18px;
+  }
+  @media(min-width:560px){
+    .picker-row{grid-template-columns:1fr 1fr;}
+    .picker-row .full{grid-column:1 / -1;}
+  }
+  .picker-col{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:12px;
+    box-shadow:var(--shadow);
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .picker-col:focus-within{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-lg);
+    border-color:var(--primary);
+  }
+  .picker-col label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:8px;
+    font-weight:700;
+  }
+  .picker-col label .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--primary);
+    flex:0 0 auto;
+  }
+  .picker-col:nth-child(2) label .dot{background:var(--accent);}
+  .picker-col:nth-child(3) label .dot{background:var(--success);}
+
+  select{
+    width:100%;
+    padding:11px 12px;
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    background:var(--bg);
+    font-size:14px;
+    color:var(--text);
+    font-family:inherit;
+    font-weight:600;
+    appearance:none;
+    -webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    padding-right:34px;
+    transition:border-color .2s,background .2s;
+    cursor:pointer;
+  }
+  select:focus{outline:none;border-color:var(--primary);background:var(--card);}
+
+  /* ---------- রেজাল্ট কার্ড ---------- */
+  .result-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:6px 16px;
+    box-shadow:var(--shadow);
+    animation:fadeUp .4s ease;
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(8px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  .result-row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+    padding:11px 0;
+    border-bottom:1px dashed var(--border);
+    font-size:13px;
+    animation:fadeUp .3s ease;
+  }
+  .result-row:last-child{border-bottom:none;}
+
+  .result-label{
+    color:var(--muted);
+    font-weight:600;
+    flex:1 1 auto;
+    line-height:1.45;
+  }
+  .result-value{
+    flex:0 0 auto;
+    max-width:55%;
+    text-align:right;
+    font-weight:800;
+    color:var(--primary);
+    word-break:break-word;
+    font-variant-numeric:tabular-nums;
+  }
+  .result-value.highlight{
+    background:var(--primary-light);
+    padding:4px 10px;
+    border-radius:8px;
+    display:inline-block;
+  }
+  .result-value.success{color:var(--success);}
+  .result-value.danger{color:var(--danger);}
+  .result-value.accent{color:var(--accent);}
+
+  .result-row-wide{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .result-row-wide .result-label{flex:none;}
+  .result-row-wide .result-value{
+    max-width:100%;
+    text-align:left;
+    background:var(--bg);
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    margin-top:6px;
+    font-size:13px;
+  }
+
+  /* সেকশন ডিভাইডার */
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    font-weight:800;
+    color:var(--primary);
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    margin:14px 0 2px;
+    padding-top:8px;
+  }
+  .section-title::before{
+    content:"";
+    width:4px;height:16px;
+    background:linear-gradient(180deg,var(--primary),var(--accent));
+    border-radius:2px;
+  }
+
+  /* ভাতা নোটিশ */
+  #outAllowance{
+    background:linear-gradient(135deg,#fef3c7,#fde68a);
+    color:#78350f;
+    padding:12px 14px;
+    border-radius:10px;
+    font-size:12.5px;
+    line-height:1.6;
+    font-weight:600;
+    border-left:4px solid var(--accent);
+    margin-top:6px;
+  }
+  @media (prefers-color-scheme: dark){
+    #outAllowance{
+      background:linear-gradient(135deg,#3b2f0b,#4a3a0d);
+      color:#fcd34d;
+    }
+  }
+
+  /* স্ট্যাট ব্যাজ */
+  .stat-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:12px 0 4px;
+  }
+  .stat-box{
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 12px;
+    text-align:center;
+  }
+  .stat-box .lbl{font-size:11px;color:var(--muted);font-weight:600;}
+  .stat-box .val{
+    font-size:16px;font-weight:800;
+    color:var(--primary);
+    margin-top:2px;
+    word-break:break-word;
+  }
+  .stat-box.green .val{color:var(--success);}
+  .stat-box.orange .val{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>৯ম জাতীয় বেতন স্কেল ২০২৬</h1>
+  <span class="badge-year">বাংলাদেশ গেজেট, অতিরিক্ত সংখ্যা
+১৭ সেপ্টেম্বর ২০২৬, এস.আর.ও. নং ৩৪৭-আইন/২০২৬</span>
+</header>
+
+<div class="info-wrap">
+  <div class="info-card">
+    <div class="info-avatar">ম</div>
+    <div class="info-text">
+      <div class="name">মুহাম্মদ রশিদুল আলম</div>
+      <div class="role">স্টেশন মাস্টার, গ্রেড-৩, চট্টগ্রাম</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="picker-row">
+    <div class="picker-col full">
+      <label><span class="dot"></span>৮ম পে-স্কেল ২০১৫ অনুযায়ী বর্তমান গ্রেড</label>
+      <select id="list1"></select>
+    </div>
+    <div class="picker-col">
+      <label><span class="dot"></span>৩০ জুন, ২০২৬ তারিখে বেতন স্কেল</label>
+      <select id="list2"></select>
+    </div>
+    <div class="picker-col">
+      <label><span class="dot"></span>৯ম জাতীয় পে-স্কেল ২০২৬</label>
+      <select id="list3"></select>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="section-title">হিসাবের সারসংক্ষেপ</div>
+
+    <div class="result-row result-row-wide">
+      <div class="result-label">পার্থক্য</div>
+      <div class="result-value danger" id="outDiff"></div>
+    </div>
+
+    <div class="result-row">
+      <div class="result-label">৯ম পে-স্কেল ২০২৬ এ বেসিক</div>
+      <div class="result-value highlight" id="outCurrent"></div>
+    </div>
+
+    <div class="result-row result-row-wide">
+      <div class="result-label">যোগফল</div>
+      <div class="result-value accent" id="outSum"></div>
+    </div>
+
+    <div class="result-row">
+      <div class="result-label" id="labelMool"></div>
+      <div class="result-value" id="outMool"></div>
+    </div>
+
+    <div class="result-row">
+      <div class="result-label">ইনক্রিমেন্টসহ ০১-০৭-২০২৬ তারিখের মূলবেতন</div>
+      <div class="result-value success" id="outNext"></div>
+    </div>
+
+    <div class="result-row result-row-wide">
+      <div class="result-label">বেতন বাড়লো</div>
+      <div class="result-value danger" id="outRaise"></div>
+    </div>
+
+    <div class="section-title">ধাপভিত্তিক মূলবেতন</div>
+
+    <div class="result-row result-row-wide">
+      <div class="result-label">১ম ধাপ · ০১-০৭-২০২৬ হতে ৩১-১২-২০২৬</div>
+      <div class="result-value" id="outHalfYear"></div>
+    </div>
+
+    <div class="result-row result-row-wide">
+      <div class="result-label">২য় ধাপ · ০১-০১-২০২৭ হতে ৩০-০৬-২০২৭</div>
+      <div class="result-value" id="outNextHalf"></div>
+    </div>
+
+    <div class="result-row result-row-wide">
+      <div class="result-label">৩য় ধাপ · ০১-০৭-২০২৭ হতে</div>
+      <div class="result-value" id="outSum2"></div>
+    </div>
+
+    <div class="result-row">
+      <div class="result-label">ইনক্রিমেন্টসহ মূলবেতন</div>
+      <div class="result-value success" id="outIncrement"></div>
+    </div>
+
+    <div class="section-title">ভাতা সংক্রান্ত তথ্য</div>
+    <div class="result-row" style="border-bottom:none;padding-bottom:6px;">
+      <div id="outAllowance">উৎসব ও নববর্ষ ভাতাসহ সব ভাতা ৩১ ডিসেম্বর ২০২৭ পর্যন্ত ৩০ জুন ২০২৬ এর অঙ্কে; নতুন হার ১ জানুয়ারি ২০২৮ থেকে। বিশেষ সুবিধা (৯ম ও তদূর্ধ্ব ১০%, ১০ম–২০তম ১৫%, সর্বনিম্ন ১,৫০০; পেনশনভোগী ১০%/১৫%, সর্বনিম্ন ৭৫০) ১ জুলাই ২০২৬ থেকে বিলুপ্ত; জুলাই থেকে তোলা অঙ্ক বকেয়ার সাথে সমন্বয় হবে (অনুচ্ছেদ ১(৩)(ট))।</div>
+    </div>
+    <div class="section-title">উচ্চতর গ্রেড সংক্রান্ত তথ্য</div>
+    <div class="result-row" style="border-bottom:none;padding-bottom:6px;">
+      <div id="outAllowance">পদোন্নতি ছাড়া একই পদে ৮ বছর পূর্তিতে ৯ম বছরে পরবর্তী উচ্চতর গ্রেড; এর ৬ বছর পর ৭ম বছরে আরেকটি। ৪র্থ গ্রেড পর্যন্ত প্রযোজ্য, একই পদে সর্বোচ্চ দুইবার (ব্লকড পদে তিনবার) (অনুচ্ছেদ ৬)।</div>
+    </div>
+    <div class="section-title">পেনশন সংক্রান্ত তথ্য</div>
+    <div class="result-row" style="border-bottom:none;padding-bottom:6px;">
+      <div id="outAllowance">নিট পেনশন স্ল্যাবভিত্তিক বৃদ্ধি: ৯,০০০ পর্যন্ত ১০০%, ২০,০০০ পর্যন্ত ৭৫%, ৩০,০০০ পর্যন্ত ৬৫%, ৪০,০০০ পর্যন্ত ৬০%, এর বেশি ৫৫%; সর্বনিম্ন ১০,০০০, সর্বোচ্চ ৭০,২০০ (অনুচ্ছেদ ৮)।</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// List 1: গ্রেড নাম
+const list1 = [
+  "১ম গ্রেড ৭৮০০০ (নির্ধারিত)",
+  "২য় গ্রেড ৬৬০০০",
+  "৩য় গ্রেড ৫৬৫০০",
+  "৪র্থ গ্রেড ৫০০০০",
+  "৫ম গ্রেড ৪৩০০০",
+  "৬ষ্ঠ গ্রেড ৩৫৫০০",
+  "৭ম গ্রেড ২৯০০০",
+  "৮ম গ্রেড ২৩০০০",
+  "৯ম গ্রেড ২২০০০",
+  "১০ম গ্রেড ১৬০০০",
+  "১১তম গ্রেড ১২৫০০",
+  "১২তম গ্রেড ১১৩০০",
+  "১৩তম গ্রেড ১১০০০",
+  "১৪তম গ্রেড ১০২০০",
+  "১৫তম গ্রেড ৯৭০০",
+  "১৬তম গ্রেড ৯৩০০",
+  "১৭তম গ্রেড ৯০০০",
+  "১৮তম গ্রেড ৮৮০০",
+  "১৯তম গ্রেড ৮৫০০",
+  "২০তম গ্রেড ৮২৫০"
+];
+
+// List 2: প্রথম বেতন স্কেল সিরিজ
+const list2 = [
+  "৭৮০০০ (নির্ধারিত)",
+  "৬৬০০০-৬৮৪৮০-৭১০৫০-৭৩৭২০-৭৬৪৯০",
+  "৫৬৫০০-৫৮৭৬০-৬১১২০-৬৩৫৭০-৬৬১২০-৬৮৭৭০-৭১৫৩০-৭৪৪০০",
+  "৫০০০০-৫২০০০-৫৪০৮০-৫৬২৫০-৫৮৫০০-৬০৮৪০-৬৩২৮০-৬৫৮২০-৬৮৪৬০-৭১২০০",
+  "৪৩০০০-৪৪৯৪০-৪৬৯৭০-৪৯০৯০-৫১৩০০-৫৩৬১০-৫৬০৩০-৫৮৫৬০-৬১২০০-৬৩৯৬০-৬৬৮৪০-৬৯৮৫০",
+  "৩৫৫০০-৩৭২৮০-৩৯১৫০-৪১১১০-৪৩১৭০-৪৫৩৩০-৪৭৬০০-৪৯৯৮০-৫২৪৮০-৫৫১১০-৫৭৮৭০-৬০৭৭০-৬৩৮১০-৬৭০১০",
+  "২৯০০০-৩০৪৫০-৩১৯৮০-৩৩৫৮০-৩৫২৬০-৩৭০৩০-৩৮৮৯০-৪০৮৪০-৪২৮৯০-৪৫০৪০-৪৭৩০০-৪৯৬৭০-৫২১৬০-৫৪৭৭০-৫৭৫১০-৬০৩৯০-৬৩৪১০",
+  "২৩০০০-২৪১৫০-২৫৩৬০-২৬৬৩০-২৭৯৭০-২৯৩৭০-৩০৮৪০-৩২৩৯০-৩৪০১০-৩৫৭২০-৩৭৫১০-৩৯৩৯০-৪১৩৬০-৪৩৪৩০-৪৫৬১০-৪৭৯০০-৫০৩০০-৫২৮২০-৫৫৪৭০",
+  "২২০০০-২৩১০০-২৪২৬০-২৫৪৮০-২৬৭৬০-২৮১০০-২৯৫১০-৩০৯৯০-৩২৫৪০-৩৪১৭০-৩৫৮৮০-৩৭৬৮০-৩৯৫৭০-৪১৫৫০-৪৩৬৩০-৪৫৮২০-৪৮১২০-৫০৫৩০-৫৩০৬০",
+  "১৬০০০-১৬৮০০-১৭৬৪০-১৮৫৩০-১৯৪৬০-২০৪৪০-২১৪৭০-২২৫৫০-২৩৬৮০-২৪৮৭০-২৬১২০-২৭৪৩০-২৮৮১০-৩০২৬০-৩১৭৮০-৩৩৩৭০-৩৫০৪০-৩৬৮০০-৩৮৬৪০",
+  "১২৫০০-১৩১৩০-১৩৭৯০-১৪৪৮০-১৫২১০-১৫৯৮০-১৬৭৮০-১৭৬২০-১৮৫১০-১৯৪৪০-২০৪২০-২১৪৫০-২২৫৩০-২৩৬৬০-২৪৮৫০-২৬১০০-২৭৪১০-২৮৭৯০-৩০২৩০",
+  "১১৩০০-১১৮৭০-১২৪৭০-১৩১০০-১৩৭৬০-১৪৪৫০-১৫১৮০-১৫৯৪০-১৬৭৪০-১৭৫৮০-১৮৪৬০-১৯৩৯০-২০৩৬০-২১৩৮০-২২৪৫০-২৩৫৮০-২৪৭৬০-২৬০০০-২৭৩০০",
+  "১১০০০-১১৫৫০-১২১৩০-১২৭৪০-১৩৩৮০-১৪০৫০-১৪৭৬০-১৫৫০০-১৬২৮০-১৭১০০-১৭৯৬০-১৮৮৬০-১৯৮১০-২০৮১০-২১৮৬০-২২৯৬০-২৪১১০-২৫৩২০-২৬৫৯০",
+  "১০২০০-১০৭১০-১১২৫০-১১৮২০-১২৪২০-১৩০৫০-১৩৭১০-১৪৪০০-১৫১২০-১৫৮৮০-১৬৬৮০-১৭৫২০-১৮৪০০-১৯৩২০-২০২৯০-২১৩১০-২২৩৮০-২৩৫০০-২৪৬৮০",
+  "৯৭০০-১০১৯০-১০৭০০-১১২৪০-১১৮১০-১২৪১০-১৩০৪০-১৩৭০০-১৪৩৯০-১৫১১০-১৫৮৭০-১৬৬৭০-১৭৫১০-১৮৩৯০-১৯৩১০-২০২৮০-২১৩০০-২২৩৭০-২৩৪৯০",
+  "৯৩০০-৯৭৭০-১০২৬০-১০৭৮০-১১৩২০-১১৮৯০-১২৪৯০-১৩১২০-১৩৭৮০-১৪৪৭০-১৫২০০-১৫৯৬০-১৬৭৬০-১৭৬০০-১৮৪৮০-১৯৪১০-২০৩৯০-২১৪১০-২২৪৯০",
+  "৯০০০-৯৪৫০-৯৯৩০-১০৪৩০-১০৯৬০-১১৫১০-১২০৯০-১২৭০০-১৩৩৪০-১৪০১০-১৪৭২০-১৫৪৬০-১৬২৪০-১৭০৬০-১৭৯২০-১৮৮২০-১৯৭৭০-২০৭৬০-২১৮০০",
+  "৮৮০০-৯২৪০-৯৭১০-১০২০০-১০৭১০-১১২৫০-১১৮২০-১২৪২০-১৩০৫০-১৩৭১০-১৪৪০০-১৫১২০-১৫৮৮০-১৬৬৮০-১৭৫২০-১৮৪০০-১৯৩২০-২০২৯০-২১৩১০",
+  "৮৫০০-৮৯৩০-৯৩৮০-৯৮৫০-১০৩৫০-১০৮৭০-১১৪২০-১২০০০-১২৬০০-১৩২৩০-১৩৯০০-১৪৬০০-১৫৩৩০-১৬১০০-১৬৯১০-১৭৭৬০-১৮৬৫০-১৯৫৯০-২০৫৭০",
+  "৮২৫০-৮৬৭০-৯১১০-৯৫৭০-১০০৫০-১০৫৬০-১১০৯০-১১৬৫০-১২২৪০-১২৮৬০-১৩৫১০-১৪১৯০-১৪৯০০-১৫৬৫০-১৬৪৪০-১৭২৭০-১৮১৪০-১৯০৫০-২০০১০"
+];
+
+// List 3: দ্বিতীয় বেতন স্কেল সিরিজ
+const list3 = [
+  "১৫৬০০০ (নির্ধারিত)",
+  "১৩২০০০-১৩৫৭০০-১৩৯৪০০-১৪৩২০০-১৪৭২০০-১৫১২০০-১৫৩০০০",
+  "১১৩০০০-১১৭০০০-১২১১০০-১২৫৩০০-১২৯৭০০-১৩৪৩০০-১৩৯০০০-১৪৩৮০০-১৪৮৮০০",
+  "১০০০০০-১০৩৫০০-১০৭২০০-১১০৯০০-১১৪৮০০-১১৮৮০০-১২৩০০০-১২৭৩০০-১৩১৭০০-১৩৬৩০০-১৪২৪০০",
+  "৮৬০০০-৮৯৫০০-৯৩১০০-৯৬৮০০-১০০৭০০-১০৪৭০০-১০৮৯০০-১১৩২০০-১১৭৭০০-১২২৫০০-১২৭৪০০-১৩২৪০০-১৩৯৭০০",
+  "৭১০০০-৭৪৬০০-৭৮৩০০-৮২২০০-৮৬৪০০-৯০৭০০-৯৫২০০-১০০০০০-১০৪৯০০-১১০২০০-১১৫৭০০-১২১৫০০-১২৭৬০০-১৩৪০০০",
+  "৫৮০০০-৬০৯০০-৬৪০০০-৬৭২০০-৭০৫০০-৭৪১০০-৭৭৮০০-৮১৭০০-৮৫৭০০-৯০০০০-৯৪৫০০-৯৯২০০-১০৪২০০-১০৯৪০০-১১৪৯০০-১২০৬০০-১২৬৮০০",
+  "৪৬০০০-৪৮৩০০-৫০৮০০-৫৩৩০০-৫৬০০০-৫৮৮০০-৬১৭০০-৬৪৮০০-৬৮০০০-৭১৪০০-৭৫০০০-৭৮৭০০-৮২৭০০-৮৬৮০০-৯১১০০-৯৫৭০০-১০০৫০০-১০৫৫০০-১১০৮০০",
+  "৪৪০০০-৪৬২০০-৪৮৬০০-৫১০০০-৫৩৫০০-৫৬২০০-৫৯০০০-৬২০০০-৬৫১০০-৬৮৩০০-৭১৭০০-৭৫৩০০-৭৯১০০-৮৩০০০-৮৭২০০-৯১৫০০-৯৬১০০-১০০৯০০-১০৫৯০০",
+  "৩২০০০-৩৩৬০০-৩৫৩০০-৩৭১০০-৩৮৯০০-৪০৯০০-৪২৯০০-৪৫১০০-৪৭৩০০-৪৯৭০০-৫২২০০-৫৪৮০০-৫৭৫০০-৬০৪০০-৬৩৪০০-৬৬৬০০-৬৯৯০০-৭৩৪০০-৭৭৩০০",
+  "২৫০০০-২৬৩০০-২৭৬০০-২৯০০০-৩০৪০০-৩২০০০-৩৩৬০০-৩৫২০০-৩৭০০০-৩৮৮০০-৪০৮০০-৪২৮০০-৪৪৯০০-৪৭২০০-৪৯৫০০-৫২০০০-৫৪৬০০-৫৭৩০০-৬০৫০০",
+  "২৪৩০০-২৫৬০০-২৬৮০০-২৮২০০-২৯৬০০-৩১১০০-৩২৬০০-৩৪২০০-৩৬০০০-৩৭৭০০-৩৯৬০০-৪১৬০০-৪৩৭০০-৪৫৯০০-৪৮২০০-৫০৬০০-৫৩১০০-৫৫৭০০-৫৮৭০০",
+  "২৪০০০-২৫২০০-২৬৫০০-২৭৮০০-২৯২০০-৩০৭০০-৩২২০০-৩৩৮০০-৩৫৫০০-৩৭৩০০-৩৯১০০-৪১১০০-৪৩২০০-৪৫৩০০-৪৭৬০০-৪৯৯০০-৫২৪০০-৫৫১০০-৫৮০০০",
+  "২৩৫০০-২৪৭০০-২৬০০০-২৭৩০০-২৮৬০০-৩০০০০-৩১৫০০-৩৩১০০-৩৬৫০০-৩৮৩০০-৪০২০০-৪২৩০০-৪৪৪০০-৪৬৬০০-৪৮৯০০-৫১৩০০-৫৩৯০০-৫৬৮০০",
+  "২২৮০০-২৪০০০-২৫২০০-২৬৪০০-২৭৮০০-২৯১০০-৩০৬০০-৩২১০০-৩৩৭০০-৩৫৪০০-৩৭২০০-৩৯০০০-৪১০০০-৪৩০০০-৪৫২০০-৪৭৪০০-৪৯৮০০-৫২৩০০-৫৫২০০",
+  "২১৯০০-২৩০০০-২৪২০০-২৫৪০০-২৬৭০০-২৮০০০-২৯৪০০-৩০৯০০-৩২৪০০-৩৪০০০-৩৫৭০০-৩৭৫০০-৩৯৪০০-৪১৩০০-৪৩৪০০-৪৫৬০০-৪৭৯০০-৫০২০০-৫২৯০০",
+  "২১৪০০-২২৫০০-২৩৬০০-২৪৮০০-২৬১০০-২৭৪০০-২৮৭০০-৩০২০০-৩১৭০০-৩৩২০০-৩৪৯০০-৩৬৭০০-৩৮৫০০-৪০৪০০-৪২৪০০-৪৪৫০০-৪৬৮০০-৪৯১০০-৫১৯০০",
+  "২১০০০-২২১০০-২৩২০০-২৪৪০০-২৫৬০০-২৬৯০০-২৮২০০-২৯৬০০-৩১১০০-৩২৬০০-৩৪৩০০-৩৬০০০-৩৭৮০০-৩৯৬০০-৪১৬০০-৪৩৭০০-৪৫৯০০-৪৮২০০-৫০৯০০",
+  "২০৫০০-২১৬০০-২২৭০০-২৩৮০০-২৫০০০-২৬২০০-২৭৫০০-২৮৯০০-৩০৩০০-৩১৯০০-৩৩৪০০-৩৫১০০-৩৬৯০০-৩৮৭০০-৪০৬০০-৪২৭০০-৪৪৮০০-৪৭০০০-৪৯৬০০",
+  "২০০০০-২১০০০-২২১০০-২৩২০০-২৪৪০০-২৫৬০০-২৬৯০০-২৮২০০-২৯৬০০-৩১১০০-৩২৬০০-৩৪৩০০-৩৬০০০-৩৭৮০০-৩৯৬০০-৪১৬০০-৪৩৭০০-৪৫৯০০-৪৮৪০০"
+];
+
+const list2Steps = list2.map(s => s.split("-"));
+const list3Steps = list3.map(s => s.split("-"));
+
+function fillSelect(id, arr, withStep){
+  const sel = document.getElementById(id);
+  sel.innerHTML = "";
+  arr.forEach((val,i)=>{
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = withStep ? (val + " · " + bnOrdinal(i+1) + " ধাপ") : val;
+    sel.appendChild(opt);
+  });
+}
+
+fillSelect("list1", list1);
+
+const bnDigits = "০১২৩৪৫৬৭৮৯";
+function bnToEnDigits(s){ return s.replace(/[০-৯]/g, d => String(bnDigits.indexOf(d))); }
+function enToBnDigits(n){ return String(n).replace(/[0-9]/g, d => bnDigits[+d]); }
+function extractNumber(str){ const en = bnToEnDigits(str||""); const m = en.match(/\d+/); return m ? parseInt(m[0],10) : NaN; }
+
+const ordinalSuffix = { 1:"ম", 2:"য়", 3:"য়", 4:"র্থ", 5:"ম", 6:"ষ্ঠ", 7:"ম", 8:"ম", 9:"ম", 10:"ম" };
+function bnOrdinal(n){ if(n<=10) return enToBnDigits(n)+ordinalSuffix[n]; return enToBnDigits(n)+"তম"; }
+function taka(n){ return isNaN(n) ? "" : "৳"+enToBnDigits(n); }
+
+function updateOutputs(){
+  const i1 = parseInt(document.getElementById("list1").value,10);
+  const i2 = parseInt(document.getElementById("list2").value,10);
+  const i3 = parseInt(document.getElementById("list3").value,10);
+
+  const steps2 = list2Steps[i1] || [];
+  const steps3 = list3Steps[i1] || [];
+
+  const val1 = extractNumber(steps2[0]);
+  const val2 = extractNumber(steps2[i2]);
+  const val3 = extractNumber(steps3[i3]);
+
+  const diff = val2 - val1;
+  document.getElementById("outDiff").textContent = isNaN(diff) ? "" :
+    (enToBnDigits(val2)+" − "+enToBnDigits(val1)+" = "+taka(diff));
+
+  document.getElementById("outCurrent").textContent = taka(val3);
+
+  const sum = val3 + diff;
+  document.getElementById("outSum").textContent = (isNaN(val3)||isNaN(diff)) ? "" :
+    (enToBnDigits(val3)+" + "+enToBnDigits(diff)+" = "+taka(sum));
+
+  let currentIdx = -1, isExact = false;
+  if(!isNaN(sum) && steps3.length){
+    const exactIdx = steps3.findIndex(s => extractNumber(s) === sum);
+    if(exactIdx !== -1){ currentIdx = exactIdx; isExact = true; }
+    else{
+      const larger = steps3.map((s,idx)=>({s,n:extractNumber(s),idx}))
+        .filter(o=>o.n>sum).sort((a,b)=>a.n-b.n);
+      currentIdx = larger.length ? larger[0].idx : steps3.length-1;
+    }
+  }
+  document.getElementById("labelMool").textContent = isExact ? "অনুরুপ ধাপ পাওয়া গেছে" : "অনুরুপ ধাপ নেই, পরবর্তী উচ্চতর ধাপ";
+  document.getElementById("outMool").textContent = currentIdx!==-1 ? taka(extractNumber(steps3[currentIdx])) : "";
+
+  let nextVal = NaN;
+  if(currentIdx!==-1){
+    const nextStep = steps3[currentIdx+1]!==undefined ? steps3[currentIdx+1] : steps3[currentIdx];
+    nextVal = extractNumber(nextStep);
+  }
+  document.getElementById("outNext").textContent = taka(nextVal);
+
+  const raise = (!isNaN(nextVal)&&!isNaN(val2)) ? nextVal-val2 : NaN;
+  document.getElementById("outRaise").textContent = isNaN(raise) ? "" :
+    (enToBnDigits(nextVal)+" − "+enToBnDigits(val2)+" = "+taka(raise));
+
+  if(!isNaN(raise)&&!isNaN(val2)){
+    const percent = (i1<=8)?40:50;
+    const portion = Math.round(raise*percent/100);
+    const halfYearTotal = portion+val2;
+    document.getElementById("outHalfYear").textContent =
+      enToBnDigits(raise)+" এর "+enToBnDigits(percent)+"% ("+enToBnDigits(portion)+") + "+
+      enToBnDigits(val2)+" = "+taka(halfYearTotal);
+  } else document.getElementById("outHalfYear").textContent = "";
+
+  if(!isNaN(raise)&&!isNaN(val2)){
+    const percent2 = (i1<=8)?70:75;
+    const portion2 = Math.round(raise*percent2/100);
+    const nextHalfTotal = portion2+val2;
+    document.getElementById("outNextHalf").textContent =
+      enToBnDigits(raise)+" এর "+enToBnDigits(percent2)+"% ("+enToBnDigits(portion2)+") + "+
+      enToBnDigits(val2)+" = "+taka(nextHalfTotal);
+  } else document.getElementById("outNextHalf").textContent = "";
+
+  let sum2 = NaN;
+  if(!isNaN(raise)&&!isNaN(val2)){
+    sum2 = raise+val2;
+    document.getElementById("outSum2").textContent =
+      enToBnDigits(raise)+" + "+enToBnDigits(val2)+" = "+taka(sum2);
+  } else document.getElementById("outSum2").textContent = "";
+
+  let incrementVal = NaN;
+  if(!isNaN(sum2)&&steps3.length){
+    let idx2 = -1;
+    const exactIdx2 = steps3.findIndex(s=>extractNumber(s)===sum2);
+    if(exactIdx2!==-1) idx2 = exactIdx2;
+    else{
+      const larger2 = steps3.map((s,idx)=>({s,n:extractNumber(s),idx}))
+        .filter(o=>o.n>sum2).sort((a,b)=>a.n-b.n);
+      idx2 = larger2.length ? larger2[0].idx : steps3.length-1;
+    }
+    const stepAbove = steps3[idx2+1]!==undefined ? steps3[idx2+1] : steps3[idx2];
+    incrementVal = extractNumber(stepAbove);
+  }
+  document.getElementById("outIncrement").textContent = taka(incrementVal);
+}
+
+function onGradeChange(){
+  const idx = document.getElementById("list1").value;
+  fillSelect("list2", list2Steps[idx], true);
+  fillSelect("list3", list3Steps[idx], true);
+  document.getElementById("list2").selectedIndex = 0;
+  document.getElementById("list3").selectedIndex = 0;
+  updateOutputs();
+}
+
+document.getElementById("list2").addEventListener("change", updateOutputs);
+document.getElementById("list3").addEventListener("change", updateOutputs);
+document.getElementById("list1").addEventListener("change", onGradeChange);
+
+onGradeChange();
+</script>
+</body>
+</html>
