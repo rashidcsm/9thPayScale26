@@ -12,6 +12,7 @@
     --accent:#f59e0b;
     --success:#10b981;
     --danger:#ef4444;
+    --purple:#7c3aed;
     --bg:#eef2f9;
     --card:#ffffff;
     --text:#0f172a;
@@ -34,7 +35,6 @@
     }
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html,body{height:100%;}
   body{
     margin:0;
     font-family:'SolaimanLipi','Noto Sans Bengali','Hind Siliguri',system-ui,-apple-system,sans-serif;
@@ -46,7 +46,6 @@
     transition:background .3s ease,color .3s ease;
   }
 
-  /* ---------- হেডার ---------- */
   header{
     position:relative;
     background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 60%,#312e81 100%);
@@ -57,68 +56,39 @@
   }
   header::before{
     content:"";
-    position:absolute;
-    top:-60px;right:-60px;
-    width:180px;height:180px;
+    position:absolute;top:-60px;right:-60px;width:180px;height:180px;
     background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);
     border-radius:50%;
   }
   header::after{
     content:"";
-    position:absolute;
-    bottom:-80px;left:-40px;
-    width:200px;height:200px;
+    position:absolute;bottom:-80px;left:-40px;width:200px;height:200px;
     background:radial-gradient(circle,rgba(245,158,11,.25),transparent 70%);
     border-radius:50%;
   }
   header h1{
-    margin:0;
-    font-size:clamp(17px,4.5vw,22px);
-    font-weight:800;
-    letter-spacing:.3px;
-    position:relative;
-    z-index:1;
+    margin:0;font-size:clamp(17px,4.5vw,22px);font-weight:800;
+    letter-spacing:.3px;position:relative;z-index:1;
     text-shadow:0 2px 6px rgba(0,0,0,.15);
   }
   header .badge-year{
-    display:inline-block;
-    margin-top:8px;
-    background:rgba(255,255,255,.18);
-    backdrop-filter:blur(6px);
+    display:inline-block;margin-top:8px;
+    background:rgba(255,255,255,.18);backdrop-filter:blur(6px);
     border:1px solid rgba(255,255,255,.25);
-    padding:4px 14px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:600;
-    position:relative;
-    z-index:1;
+    padding:4px 14px;border-radius:999px;
+    font-size:12px;font-weight:600;position:relative;z-index:1;
   }
 
-  /* ---------- ইনফো কার্ড ---------- */
-  .info-wrap{
-    max-width:640px;
-    margin:-16px auto 0;
-    padding:0 16px;
-    position:relative;
-    z-index:2;
-  }
+  .info-wrap{max-width:680px;margin:-16px auto 0;padding:0 16px;position:relative;z-index:2;}
   .info-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:14px 16px;
-    box-shadow:var(--shadow);
-    display:flex;
-    align-items:center;
-    gap:12px;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:14px 16px;
+    box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;
   }
   .info-avatar{
-    width:42px;height:42px;
-    flex:0 0 auto;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--primary),#7c3aed);
-    color:#fff;
-    display:flex;align-items:center;justify-content:center;
+    width:42px;height:42px;flex:0 0 auto;border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--purple));
+    color:#fff;display:flex;align-items:center;justify-content:center;
     font-weight:800;font-size:16px;
     box-shadow:0 4px 12px rgba(37,99,235,.35);
   }
@@ -126,76 +96,101 @@
   .info-text .name{font-weight:700;font-size:14px;}
   .info-text .role{font-size:12px;color:var(--muted);margin-top:2px;}
 
-  /* ---------- কন্টেইনার ---------- */
-  .container{
-    padding:18px 16px 40px;
-    max-width:640px;
-    margin:0 auto;
-  }
+  .container{padding:18px 16px 50px;max-width:680px;margin:0 auto;}
 
-  /* ---------- পিকার ---------- */
-  .picker-row{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:14px;
-    margin-bottom:18px;
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:14px;
+    box-shadow:var(--shadow);
+    margin-bottom:16px;
+    transition:transform .2s ease,box-shadow .2s ease;
   }
+  .card:focus-within{box-shadow:var(--shadow-lg);border-color:var(--primary);}
+
+  .card-title{
+    display:flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:800;color:var(--primary);
+    text-transform:uppercase;letter-spacing:.4px;
+    margin:0 0 12px;padding-bottom:8px;
+    border-bottom:1px solid var(--border);
+  }
+  .card-title::before{
+    content:"";width:4px;height:16px;
+    background:linear-gradient(180deg,var(--primary),var(--accent));
+    border-radius:2px;
+  }
+  .card-title.purple{color:var(--purple);}
+  .card-title.purple::before{background:linear-gradient(180deg,var(--purple),var(--primary));}
+  .card-title.green{color:var(--success);}
+  .card-title.green::before{background:linear-gradient(180deg,var(--success),var(--accent));}
+
+  .picker-row{display:grid;grid-template-columns:1fr;gap:12px;}
   @media(min-width:560px){
     .picker-row{grid-template-columns:1fr 1fr;}
     .picker-row .full{grid-column:1 / -1;}
   }
-  .picker-col{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:12px;
-    box-shadow:var(--shadow);
-    transition:transform .2s ease,box-shadow .2s ease;
-  }
-  .picker-col:focus-within{
-    transform:translateY(-2px);
-    box-shadow:var(--shadow-lg);
-    border-color:var(--primary);
-  }
+  .picker-col{min-width:0;}
   .picker-col label{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    font-size:12px;
-    color:var(--muted);
-    margin-bottom:8px;
-    font-weight:700;
+    display:flex;align-items:center;gap:6px;
+    font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700;
   }
   .picker-col label .dot{
     width:8px;height:8px;border-radius:50%;
-    background:var(--primary);
-    flex:0 0 auto;
+    background:var(--primary);flex:0 0 auto;
   }
-  .picker-col:nth-child(2) label .dot{background:var(--accent);}
-  .picker-col:nth-child(3) label .dot{background:var(--success);}
+  .picker-col label .dot.orange{background:var(--accent);}
+  .picker-col label .dot.green{background:var(--success);}
+  .picker-col label .dot.purple{background:var(--purple);}
+  .picker-col label .dot.red{background:var(--danger);}
 
   select{
-    width:100%;
-    padding:11px 12px;
-    border:1.5px solid var(--border);
-    border-radius:10px;
-    background:var(--bg);
-    font-size:14px;
-    color:var(--text);
-    font-family:inherit;
-    font-weight:600;
-    appearance:none;
-    -webkit-appearance:none;
+    width:100%;padding:11px 12px;
+    border:1.5px solid var(--border);border-radius:10px;
+    background:var(--bg);font-size:14px;color:var(--text);
+    font-family:inherit;font-weight:600;
+    appearance:none;-webkit-appearance:none;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
-    background-repeat:no-repeat;
-    background-position:right 12px center;
-    padding-right:34px;
-    transition:border-color .2s,background .2s;
-    cursor:pointer;
+    background-repeat:no-repeat;background-position:right 12px center;
+    padding-right:34px;transition:border-color .2s,background .2s;cursor:pointer;
   }
   select:focus{outline:none;border-color:var(--primary);background:var(--card);}
 
-  /* ---------- রেজাল্ট কার্ড ---------- */
+  .toggle-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 0;border-bottom:1px dashed var(--border);gap:10px;
+  }
+  .toggle-row:last-child{border-bottom:none;}
+  .toggle-label{
+    font-size:13px;font-weight:600;color:var(--text);flex:1;
+    display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  }
+  .toggle-label small{color:var(--muted);font-weight:500;font-size:11px;}
+
+  .switch{
+    position:relative;display:inline-block;
+    width:48px;height:26px;flex:0 0 auto;
+  }
+  .switch input{opacity:0;width:0;height:0;}
+  .slider{
+    position:absolute;cursor:pointer;
+    top:0;left:0;right:0;bottom:0;
+    background:#cbd5e1;border-radius:26px;
+    transition:.3s;
+  }
+  .slider:before{
+    content:"";position:absolute;
+    height:20px;width:20px;left:3px;bottom:3px;
+    background:#fff;border-radius:50%;
+    transition:.3s;box-shadow:0 2px 4px rgba(0,0,0,.2);
+  }
+  .switch input:checked + .slider{background:var(--primary);}
+  .switch input:checked + .slider:before{transform:translateX(22px);}
+  .switch.green input:checked + .slider{background:var(--success);}
+  .switch.orange input:checked + .slider{background:var(--accent);}
+  .switch.purple input:checked + .slider{background:var(--purple);}
+
   .result-card{
     background:var(--card);
     border:1px solid var(--border);
@@ -203,96 +198,63 @@
     padding:6px 16px;
     box-shadow:var(--shadow);
     animation:fadeUp .4s ease;
+    margin-bottom:16px;
   }
   @keyframes fadeUp{
     from{opacity:0;transform:translateY(8px);}
     to{opacity:1;transform:translateY(0);}
   }
-
   .result-row{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:10px;
-    padding:11px 0;
+    display:flex;align-items:flex-start;justify-content:space-between;
+    gap:10px;padding:11px 0;
     border-bottom:1px dashed var(--border);
-    font-size:13px;
-    animation:fadeUp .3s ease;
+    font-size:13px;animation:fadeUp .3s ease;
   }
   .result-row:last-child{border-bottom:none;}
-
   .result-label{
-    color:var(--muted);
-    font-weight:600;
-    flex:1 1 auto;
-    line-height:1.45;
+    color:var(--muted);font-weight:600;
+    flex:1 1 auto;line-height:1.45;
   }
   .result-value{
-    flex:0 0 auto;
-    max-width:55%;
-    text-align:right;
-    font-weight:800;
-    color:var(--primary);
-    word-break:break-word;
-    font-variant-numeric:tabular-nums;
+    flex:0 0 auto;max-width:55%;text-align:right;
+    font-weight:800;color:var(--primary);
+    word-break:break-word;font-variant-numeric:tabular-nums;
   }
   .result-value.highlight{
     background:var(--primary-light);
-    padding:4px 10px;
-    border-radius:8px;
-    display:inline-block;
+    padding:4px 10px;border-radius:8px;display:inline-block;
   }
   .result-value.success{color:var(--success);}
   .result-value.danger{color:var(--danger);}
   .result-value.accent{color:var(--accent);}
+  .result-value.purple{color:var(--purple);}
 
-  .result-row-wide{
-    flex-direction:column;
-    align-items:stretch;
-  }
+  .result-row-wide{flex-direction:column;align-items:stretch;}
   .result-row-wide .result-label{flex:none;}
   .result-row-wide .result-value{
-    max-width:100%;
-    text-align:left;
-    background:var(--bg);
-    padding:8px 12px;
-    border-radius:8px;
-    border:1px solid var(--border);
-    margin-top:6px;
-    font-size:13px;
+    max-width:100%;text-align:left;
+    background:var(--bg);padding:8px 12px;
+    border-radius:8px;border:1px solid var(--border);
+    margin-top:6px;font-size:13px;
   }
 
-  /* সেকশন ডিভাইডার */
   .section-title{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:12px;
-    font-weight:800;
-    color:var(--primary);
-    text-transform:uppercase;
-    letter-spacing:.5px;
-    margin:14px 0 2px;
-    padding-top:8px;
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:800;color:var(--primary);
+    text-transform:uppercase;letter-spacing:.5px;
+    margin:14px 0 2px;padding-top:8px;
   }
   .section-title::before{
-    content:"";
-    width:4px;height:16px;
+    content:"";width:4px;height:16px;
     background:linear-gradient(180deg,var(--primary),var(--accent));
     border-radius:2px;
   }
 
-  /* ভাতা নোটিশ */
   #outAllowance{
     background:linear-gradient(135deg,#fef3c7,#fde68a);
-    color:#78350f;
-    padding:12px 14px;
-    border-radius:10px;
-    font-size:12.5px;
-    line-height:1.6;
-    font-weight:600;
-    border-left:4px solid var(--accent);
-    margin-top:6px;
+    color:#78350f;padding:12px 14px;border-radius:10px;
+    font-size:12.5px;line-height:1.6;font-weight:600;
+    border-left:4px solid var(--accent);margin-top:6px;
   }
   @media (prefers-color-scheme: dark){
     #outAllowance{
@@ -301,36 +263,120 @@
     }
   }
 
-  /* স্ট্যাট ব্যাজ */
-  .stat-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
+  /* ভাতা সহ মোট বেতন — ব্যাজ */
+  .total-badge{
+    display:flex;
+    align-items:center;
+    justify-content:center;
     gap:10px;
-    margin:12px 0 4px;
+    background:linear-gradient(135deg,var(--primary) 0%,var(--purple) 100%);
+    color:#fff;
+    padding:14px 22px;
+    border-radius:999px;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.5px;
+    box-shadow:0 8px 24px rgba(37,99,235,.3);
+    margin:0 auto 16px;
+    width:fit-content;
+    max-width:100%;
+    position:relative;
+    overflow:hidden;
   }
-  .stat-box{
-    background:var(--bg);
+  .total-badge::before{
+    content:"";
+    position:absolute;
+    top:-30px;right:-30px;
+    width:80px;height:80px;
+    background:radial-gradient(circle,rgba(255,255,255,.25),transparent 70%);
+    border-radius:50%;
+  }
+  .total-badge::after{
+    content:"৳";
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;height:26px;
+    background:rgba(255,255,255,.2);
+    border-radius:50%;
+    font-size:14px;
+    position:relative;
+    z-index:1;
+  }
+  .total-badge span{
+    position:relative;
+    z-index:1;
+  }
+
+  .step-total-list{
+    display:flex;flex-direction:column;gap:10px;
+    margin-bottom:16px;
+  }
+  .step-total-card{
+    background:var(--card);
     border:1px solid var(--border);
-    border-radius:10px;
-    padding:10px 12px;
-    text-align:center;
+    border-left:5px solid var(--primary);
+    border-radius:var(--radius);
+    padding:12px 14px;
+    box-shadow:var(--shadow);
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;
+    transition:transform .2s ease,box-shadow .2s ease;
   }
-  .stat-box .lbl{font-size:11px;color:var(--muted);font-weight:600;}
-  .stat-box .val{
-    font-size:16px;font-weight:800;
+  .step-total-card:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-lg);
+  }
+  .step-total-card.step2{border-left-color:var(--accent);}
+  .step-total-card.step3{border-left-color:var(--success);}
+
+  .step-info{min-width:0;flex:1;}
+  .step-info .step-name{
+    font-size:12px;font-weight:800;color:var(--primary);
+    text-transform:uppercase;letter-spacing:.4px;
+    margin-bottom:4px;
+  }
+  .step-total-card.step2 .step-info .step-name{color:var(--accent);}
+  .step-total-card.step3 .step-info .step-name{color:var(--success);}
+  .step-info .step-date{
+    font-size:12.5px;color:var(--muted);font-weight:600;
+  }
+  .step-info .step-breakdown{
+    font-size:11px;color:var(--muted);
+    margin-top:3px;opacity:.85;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .step-amount{
+    font-size:17px;font-weight:900;
     color:var(--primary);
-    margin-top:2px;
-    word-break:break-word;
+    text-align:right;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
   }
-  .stat-box.green .val{color:var(--success);}
-  .stat-box.orange .val{color:var(--accent);}
+  .step-total-card.step2 .step-amount{color:var(--accent);}
+  .step-total-card.step3 .step-amount{color:var(--success);}
+
+  .allowance-list{font-size:13px;}
+  .allowance-list .item{
+    display:flex;justify-content:space-between;
+    gap:10px;padding:9px 0;
+    border-bottom:1px dashed var(--border);
+  }
+  .allowance-list .item:last-child{border-bottom:none;}
+  .allowance-list .item .lbl{color:var(--muted);font-weight:600;}
+  .allowance-list .item .val{
+    font-weight:800;color:var(--text);
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .allowance-list .item .val.on{color:var(--success);}
+  .allowance-list .item .val.off{color:var(--muted);font-weight:500;}
 </style>
 </head>
 <body>
 
 <header>
   <h1>৯ম জাতীয় বেতন স্কেল ২০২৬</h1>
-  <span class="badge-year">বাংলাদেশ গেজেট, অতিরিক্ত সংখ্যা
+  <span class="badge-year">ভাতাসহ সম্পূর্ণ বেতন হিসাব<br>বাংলাদেশ গেজেট, অতিরিক্ত সংখ্যা
 ১৭ সেপ্টেম্বর ২০২৬, এস.আর.ও. নং ৩৪৭-আইন/২০২৬</span>
 </header>
 
@@ -339,29 +385,37 @@
     <div class="info-avatar">ম</div>
     <div class="info-text">
       <div class="name">মুহাম্মদ রশিদুল আলম</div>
-      <div class="role">স্টেশন মাস্টার, গ্রেড-৩, চট্টগ্রাম</div>
+      <div class="role">স্টেশন মাস্টার, গ্রেড-৩<br>বাংলাদেশ রেলওয়ে, চট্টগ্রাম</div>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <div class="picker-row">
-    <div class="picker-col full">
-      <label><span class="dot"></span>৮ম পে-স্কেল ২০১৫ অনুযায়ী বর্তমান গ্রেড</label>
-      <select id="list1"></select>
-    </div>
-    <div class="picker-col">
-      <label><span class="dot"></span>৩০ জুন, ২০২৬ তারিখে বেতন স্কেল</label>
-      <select id="list2"></select>
-    </div>
-    <div class="picker-col">
-      <label><span class="dot"></span>৯ম জাতীয় পে-স্কেল ২০২৬</label>
-      <select id="list3"></select>
+
+  <div class="card">
+    <div class="card-title">মূল বেতন নির্বাচন</div>
+    <div class="picker-row">
+      <div class="picker-col full">
+        <label><span class="dot"></span>৮ম পে-স্কেল ২০১৫ অনুযায়ী বর্তমান গ্রেড</label>
+        <select id="list1"></select>
+      </div>
+      <div class="picker-col">
+        <label><span class="dot orange"></span>৩০ জুন, ২০২৬ তারিখে বেতন স্কেল</label>
+        <select id="list2"></select>
+      </div>
+      <div class="picker-col">
+        <label><span class="dot green"></span>৯ম জাতীয় পে-স্কেল ২০২৬</label>
+        <select id="list3"></select>
+      </div>
+      <div class="picker-col full">
+        <label><span class="dot purple"></span>কর্মস্থল নির্বাচন (ঘর ভাড়ার জন্য)</label>
+        <select id="list4"></select>
+      </div>
     </div>
   </div>
 
   <div class="result-card">
-    <div class="section-title">হিসাবের সারসংক্ষেপ</div>
+    <div class="section-title">মূল বেতন হিসাবের সারসংক্ষেপ</div>
 
     <div class="result-row result-row-wide">
       <div class="result-label">পার্থক্য</div>
@@ -417,21 +471,157 @@
 
     <div class="section-title">ভাতা সংক্রান্ত তথ্য</div>
     <div class="result-row" style="border-bottom:none;padding-bottom:6px;">
-      <div id="outAllowance">উৎসব ও নববর্ষ ভাতাসহ সব ভাতা ৩১ ডিসেম্বর ২০২৭ পর্যন্ত ৩০ জুন ২০২৬ এর অঙ্কে; নতুন হার ১ জানুয়ারি ২০২৮ থেকে। বিশেষ সুবিধা (৯ম ও তদূর্ধ্ব ১০%, ১০ম–২০তম ১৫%, সর্বনিম্ন ১,৫০০; পেনশনভোগী ১০%/১৫%, সর্বনিম্ন ৭৫০) ১ জুলাই ২০২৬ থেকে বিলুপ্ত; জুলাই থেকে তোলা অঙ্ক বকেয়ার সাথে সমন্বয় হবে (অনুচ্ছেদ ১(৩)(ট))।</div>
-    </div>
-    <div class="section-title">উচ্চতর গ্রেড সংক্রান্ত তথ্য</div>
-    <div class="result-row" style="border-bottom:none;padding-bottom:6px;">
-      <div id="outAllowance">পদোন্নতি ছাড়া একই পদে ৮ বছর পূর্তিতে ৯ম বছরে পরবর্তী উচ্চতর গ্রেড; এর ৬ বছর পর ৭ম বছরে আরেকটি। ৪র্থ গ্রেড পর্যন্ত প্রযোজ্য, একই পদে সর্বোচ্চ দুইবার (ব্লকড পদে তিনবার) (অনুচ্ছেদ ৬)।</div>
-    </div>
-    <div class="section-title">পেনশন সংক্রান্ত তথ্য</div>
-    <div class="result-row" style="border-bottom:none;padding-bottom:6px;">
-      <div id="outAllowance">নিট পেনশন স্ল্যাবভিত্তিক বৃদ্ধি: ৯,০০০ পর্যন্ত ১০০%, ২০,০০০ পর্যন্ত ৭৫%, ৩০,০০০ পর্যন্ত ৬৫%, ৪০,০০০ পর্যন্ত ৬০%, এর বেশি ৫৫%; সর্বনিম্ন ১০,০০০, সর্বোচ্চ ৭০,২০০ (অনুচ্ছেদ ৮)।</div>
+      <div id="outAllowance">৩০-০৬-২০২৬ তারিখে মূলবেতনের সাথে আহরিত অন্যান্য ভাতাগুলো ৩১-১২-২০২৭ তারিখ পর্যন্ত চলমান থাকবে। ০১-০১-২০২৮ তারিখ থেকে নতুন হারে ভাতা যোগ হবে।</div>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-title purple">ভাতা সংক্রান্ত নির্বাচন</div>
+
+    <div class="picker-row">
+      <div class="picker-col full">
+        <label><span class="dot green"></span>চিকিৎসা ভাতা (বয়স অনুযায়ী)</label>
+        <select id="listMedical">
+          <option value="below65">৬৫ বছরের নিচে — ৳১৫০০</option>
+          <option value="above65">৬৫ বছরের উপরে — ৳২৫০০</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+
+      <div class="toggle-row">
+        <div class="toggle-label">
+          শিক্ষা ভাতা
+          <small>(সন্তান সংখ্যা)</small>
+        </div>
+        <select id="listEducation" style="max-width:140px;">
+          <option value="0">সন্তান নেই</option>
+          <option value="1">১টি সন্তান</option>
+          <option value="2">২টি সন্তান</option>
+        </select>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">বাংলা নববর্ষ ভাতা <small>(২য় লিস্টের ২০%)</small></div>
+        <label class="switch orange">
+          <input type="checkbox" id="togNoboBorsho">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">কার্যভার ভাতা <small>(১০%, সর্বোচ্চ ৳১৫০০)</small></div>
+        <label class="switch purple">
+          <input type="checkbox" id="togKarjovhar">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">উৎসব ভাতা <small>(প্রযোজ্য নয় / মুসলিম / অন্যান্য)</small></div>
+        <select id="listUtshob" style="max-width:150px;">
+          <option value="none">প্রযোজ্য নয়</option>
+          <option value="muslim">মুসলিম (১×)</option>
+          <option value="other">অন্যান্য (২×)</option>
+        </select>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">শ্রান্তি বিনোদন ভাতা</div>
+        <label class="switch green">
+          <input type="checkbox" id="togSranti">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- নতুন ভাতা ১: ধোলাই ভাতা -->
+      <div class="toggle-row">
+        <div class="toggle-label">ধোলাই ভাতা <small>(প্রযোজ্য হলে ৳১০০)</small></div>
+        <select id="listDholai" style="max-width:150px;">
+          <option value="none">প্রযোজ্য নয়</option>
+          <option value="yes">প্রযোজ্য</option>
+        </select>
+      </div>
+
+      <!-- নতুন ভাতা ২: আপ্যায়ন ভাতা -->
+      <div class="toggle-row">
+        <div class="toggle-label">আপ্যায়ন ভাতা <small>(পদ অনুযায়ী)</small></div>
+        <select id="listApyayon" style="max-width:170px;">
+          <option value="none">প্রযোজ্য নয়</option>
+          <option value="minister">মন্ত্রী পরিষদ সচিব/মুখ্যসচিব (৳২০০০)</option>
+          <option value="secretary">সিনিয়র সচিব/সচিব (৳১০০০)</option>
+          <option value="addl">অতিরিক্ত সচিব (৳৯০০)</option>
+          <option value="joint">যুগ্ম সচিব/অন্যান্য (৳৬০০)</option>
+        </select>
+      </div>
+
+      <!-- নতুন ভাতা ৩: ডোমেস্টিক এইড এলাউন্স -->
+      <div class="toggle-row">
+        <div class="toggle-label">ডোমেস্টিক এইড এলাউন্স <small>(প্রযোজ্য হলে ৳৩০০০)</small></div>
+        <select id="listDomestic" style="max-width:150px;">
+          <option value="none">প্রযোজ্য নয়</option>
+          <option value="yes">প্রযোজ্য</option>
+        </select>
+      </div>
+
+      <!-- নতুন ভাতা ৪: পাহাড়ি ভাতা -->
+      <div class="toggle-row">
+        <div class="toggle-label">পাহাড়ি ভাতা <small>(মূলবেতনের ২০%)</small></div>
+        <select id="listPahari" style="max-width:180px;">
+          <option value="none">প্রযোজ্য নয়</option>
+          <option value="sadar">পার্বত্য জেলা সদর/সদর উপজেলা (সর্বোচ্চ ৳৩০০০)</option>
+          <option value="other">অন্যান্য উপজেলা (সর্বোচ্চ ৳৫০০০)</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title green">প্রাপ্ত ভাতার তালিকা</div>
+    <div class="allowance-list" id="allowanceList"></div>
+  </div>
+
+  <!-- ভাতা সহ মোট বেতন — ব্যাজ -->
+  <div class="total-badge">
+    <span>ভাতা সহ মোট বেতন</span>
+  </div>
+
+  <!-- ধাপভিত্তিক ভাতাসহ মোট বেতন -->
+  <div class="step-total-list">
+    <div class="step-total-card step1">
+      <div class="step-info">
+        <div class="step-name">১ম ধাপ</div>
+        <div class="step-date">৩০-০৬-২০২৬ – ৩১-১২-২০২৬</div>
+        <div class="step-breakdown" id="step1Breakdown"></div>
+      </div>
+      <div class="step-amount" id="outStep1Total">৳০</div>
+    </div>
+
+    <div class="step-total-card step2">
+      <div class="step-info">
+        <div class="step-name">২য় ধাপ</div>
+        <div class="step-date">০১-০১-২০২৭ – ৩০-০৬-২০২৭</div>
+        <div class="step-breakdown" id="step2Breakdown"></div>
+      </div>
+      <div class="step-amount" id="outStep2Total">৳০</div>
+    </div>
+
+    <div class="step-total-card step3">
+      <div class="step-info">
+        <div class="step-name">৩য় ধাপ</div>
+        <div class="step-date">০১-০৭-২০২৭ – ৩১-১২-২০২৭</div>
+        <div class="step-breakdown" id="step3Breakdown"></div>
+      </div>
+      <div class="step-amount" id="outStep3Total">৳০</div>
+    </div>
+  </div>
+
 </div>
 
 <script>
-// List 1: গ্রেড নাম
+/* ============ ডাটা ============ */
 const list1 = [
   "১ম গ্রেড ৭৮০০০ (নির্ধারিত)",
   "২য় গ্রেড ৬৬০০০",
@@ -455,7 +645,6 @@ const list1 = [
   "২০তম গ্রেড ৮২৫০"
 ];
 
-// List 2: প্রথম বেতন স্কেল সিরিজ
 const list2 = [
   "৭৮০০০ (নির্ধারিত)",
   "৬৬০০০-৬৮৪৮০-৭১০৫০-৭৩৭২০-৭৬৪৯০",
@@ -479,7 +668,6 @@ const list2 = [
   "৮২৫০-৮৬৭০-৯১১০-৯৫৭০-১০০৫০-১০৫৬০-১১০৯০-১১৬৫০-১২২৪০-১২৮৬০-১৩৫১০-১৪১৯০-১৪৯০০-১৫৬৫০-১৬৪৪০-১৭২৭০-১৮১৪০-১৯০৫০-২০০১০"
 ];
 
-// List 3: দ্বিতীয় বেতন স্কেল সিরিজ
 const list3 = [
   "১৫৬০০০ (নির্ধারিত)",
   "১৩২০০০-১৩৫৭০০-১৩৯৪০০-১৪৩২০০-১৪৭২০০-১৫১২০০-১৫৩০০০",
@@ -503,9 +691,38 @@ const list3 = [
   "২০০০০-২১০০০-২২১০০-২৩২০০-২৪৪০০-২৫৬০০-২৬৯০০-২৮২০০-২৯৬০০-৩১১০০-৩২৬০০-৩৪৩০০-৩৬০০০-৩৭৮০০-৩৯৬০০-৪১৬০০-৪৩৭০০-৪৫৯০০-৪৮৪০০"
 ];
 
+const list4 = [
+  "ঢাকা সিটি কর্পোরেশন",
+  "চট্টগ্রাম",
+  "সিলেট",
+  "রাজশাহী",
+  "খুলনা",
+  "বরিশাল",
+  "রংপুর",
+  "গাজীপুর",
+  "নারায়ণগঞ্জ",
+  "সাভার পৌর এলাকা",
+  "অন্যান্য"
+];
+
 const list2Steps = list2.map(s => s.split("-"));
 const list3Steps = list3.map(s => s.split("-"));
 
+/* ============ হেল্পার ============ */
+const bnDigits = "০১২৩৪৫৬৭৮৯";
+function bnToEnDigits(s){ return s.replace(/[০-৯]/g, d => String(bnDigits.indexOf(d))); }
+function enToBnDigits(n){ return String(n).replace(/[0-9]/g, d => bnDigits[+d]); }
+function extractNumber(str){
+  const en = bnToEnDigits(str||"");
+  const m = en.match(/\d+/);
+  return m ? parseInt(m[0],10) : NaN;
+}
+const ordinalSuffix = { 1:"ম", 2:"য়", 3:"য়", 4:"র্থ", 5:"ম", 6:"ষ্ঠ", 7:"ম", 8:"ম", 9:"ম", 10:"ম" };
+function bnOrdinal(n){ if(n<=10) return enToBnDigits(n)+ordinalSuffix[n]; return enToBnDigits(n)+"তম"; }
+function taka(n){
+  if(isNaN(n)) return "";
+  return "৳"+enToBnDigits(Math.round(n));
+}
 function fillSelect(id, arr, withStep){
   const sel = document.getElementById(id);
   sel.innerHTML = "";
@@ -517,21 +734,43 @@ function fillSelect(id, arr, withStep){
   });
 }
 
-fillSelect("list1", list1);
+/* ============ ঘর ভাড়া হিসাব ============ */
+function calcHouseRent(workplace, val2){
+  if(isNaN(val2)) return {amount:0, percent:0, label:""};
 
-const bnDigits = "০১২৩৪৫৬৭৮৯";
-function bnToEnDigits(s){ return s.replace(/[০-৯]/g, d => String(bnDigits.indexOf(d))); }
-function enToBnDigits(n){ return String(n).replace(/[0-9]/g, d => bnDigits[+d]); }
-function extractNumber(str){ const en = bnToEnDigits(str||""); const m = en.match(/\d+/); return m ? parseInt(m[0],10) : NaN; }
+  let percent = 0;
+  let slabLabel = "";
 
-const ordinalSuffix = { 1:"ম", 2:"য়", 3:"য়", 4:"র্থ", 5:"ম", 6:"ষ্ঠ", 7:"ম", 8:"ম", 9:"ম", 10:"ম" };
-function bnOrdinal(n){ if(n<=10) return enToBnDigits(n)+ordinalSuffix[n]; return enToBnDigits(n)+"তম"; }
-function taka(n){ return isNaN(n) ? "" : "৳"+enToBnDigits(n); }
+  const isDhaka = (workplace === "ঢাকা সিটি কর্পোরেশন");
+  const isCityCorp = ["চট্টগ্রাম","সিলেট","রাজশাহী","খুলনা","বরিশাল","রংপুর","গাজীপুর","নারায়ণগঞ্জ","সাভার পৌর এলাকা"].includes(workplace);
 
+  if(isDhaka){
+    if(val2 <= 9700){ percent = 65; slabLabel = "৯৭০০ পর্যন্ত"; }
+    else if(val2 <= 16000){ percent = 60; slabLabel = "৯৭০১-১৬০০০"; }
+    else if(val2 <= 35500){ percent = 55; slabLabel = "১৬০০১-৩৫৫০০"; }
+    else { percent = 50; slabLabel = "৩৫৫০১+"; }
+  } else if(isCityCorp){
+    if(val2 <= 9700){ percent = 55; slabLabel = "৯৭০০ পর্যন্ত"; }
+    else if(val2 <= 16000){ percent = 50; slabLabel = "৯৭০১-১৬০০০"; }
+    else if(val2 <= 35500){ percent = 45; slabLabel = "১৬০০১-৩৫৫০০"; }
+    else { percent = 40; slabLabel = "৩৫৫০১+"; }
+  } else {
+    if(val2 <= 9700){ percent = 50; slabLabel = "৯৭০০ পর্যন্ত"; }
+    else if(val2 <= 16000){ percent = 45; slabLabel = "৯৭০১-১৬০০০"; }
+    else if(val2 <= 35500){ percent = 40; slabLabel = "১৬০০১-৩৫৫০০"; }
+    else { percent = 35; slabLabel = "৩৫৫০১+"; }
+  }
+
+  return {amount: Math.round(val2 * percent / 100), percent, label: slabLabel};
+}
+
+/* ============ মূল হিসাব ============ */
 function updateOutputs(){
   const i1 = parseInt(document.getElementById("list1").value,10);
   const i2 = parseInt(document.getElementById("list2").value,10);
   const i3 = parseInt(document.getElementById("list3").value,10);
+  const i4 = parseInt(document.getElementById("list4").value,10);
+  const workplace = list4[i4];
 
   const steps2 = list2Steps[i1] || [];
   const steps3 = list3Steps[i1] || [];
@@ -574,47 +813,272 @@ function updateOutputs(){
   document.getElementById("outRaise").textContent = isNaN(raise) ? "" :
     (enToBnDigits(nextVal)+" − "+enToBnDigits(val2)+" = "+taka(raise));
 
+  // ১ম ধাপ
+  let step1Total = NaN;
   if(!isNaN(raise)&&!isNaN(val2)){
     const percent = (i1<=8)?40:50;
     const portion = Math.round(raise*percent/100);
-    const halfYearTotal = portion+val2;
+    step1Total = portion+val2;
     document.getElementById("outHalfYear").textContent =
       enToBnDigits(raise)+" এর "+enToBnDigits(percent)+"% ("+enToBnDigits(portion)+") + "+
-      enToBnDigits(val2)+" = "+taka(halfYearTotal);
+      enToBnDigits(val2)+" = "+taka(step1Total);
   } else document.getElementById("outHalfYear").textContent = "";
 
+  // ২য় ধাপ
+  let step2Total = NaN;
   if(!isNaN(raise)&&!isNaN(val2)){
     const percent2 = (i1<=8)?70:75;
     const portion2 = Math.round(raise*percent2/100);
-    const nextHalfTotal = portion2+val2;
+    step2Total = portion2+val2;
     document.getElementById("outNextHalf").textContent =
       enToBnDigits(raise)+" এর "+enToBnDigits(percent2)+"% ("+enToBnDigits(portion2)+") + "+
-      enToBnDigits(val2)+" = "+taka(nextHalfTotal);
+      enToBnDigits(val2)+" = "+taka(step2Total);
   } else document.getElementById("outNextHalf").textContent = "";
 
-  let sum2 = NaN;
+  // ৩য় ধাপ (ভিত্তি)
+  let step3Total = NaN;
   if(!isNaN(raise)&&!isNaN(val2)){
-    sum2 = raise+val2;
+    step3Total = raise+val2;
     document.getElementById("outSum2").textContent =
-      enToBnDigits(raise)+" + "+enToBnDigits(val2)+" = "+taka(sum2);
+      enToBnDigits(raise)+" + "+enToBnDigits(val2)+" = "+taka(step3Total);
   } else document.getElementById("outSum2").textContent = "";
 
+  // ইনক্রিমেন্টসহ মূলবেতন
   let incrementVal = NaN;
-  if(!isNaN(sum2)&&steps3.length){
+  if(!isNaN(step3Total)&&steps3.length){
     let idx2 = -1;
-    const exactIdx2 = steps3.findIndex(s=>extractNumber(s)===sum2);
+    const exactIdx2 = steps3.findIndex(s=>extractNumber(s)===step3Total);
     if(exactIdx2!==-1) idx2 = exactIdx2;
     else{
       const larger2 = steps3.map((s,idx)=>({s,n:extractNumber(s),idx}))
-        .filter(o=>o.n>sum2).sort((a,b)=>a.n-b.n);
+        .filter(o=>o.n>step3Total).sort((a,b)=>a.n-b.n);
       idx2 = larger2.length ? larger2[0].idx : steps3.length-1;
     }
     const stepAbove = steps3[idx2+1]!==undefined ? steps3[idx2+1] : steps3[idx2];
     incrementVal = extractNumber(stepAbove);
   }
   document.getElementById("outIncrement").textContent = taka(incrementVal);
+
+  updateAllowances(val2, incrementVal, i1, workplace, step1Total, step2Total, step3Total);
 }
 
+/* ============ ভাতার হিসাব ============ */
+function updateAllowances(val2, incrementVal, gradeIdx, workplace, step1Total, step2Total, step3Total){
+  const allowances = [];
+  let total = 0;
+
+  // ১. ঘর ভাড়া
+  const house = calcHouseRent(workplace, val2);
+  allowances.push({
+    name: `ঘর ভাড়া (${workplace})`,
+    detail: house.percent + "% × " + enToBnDigits(val2),
+    amount: house.amount
+  });
+  total += house.amount;
+
+  // ২. চিকিৎসা ভাতা
+  const medicalVal = document.getElementById("listMedical").value;
+  const medicalAmount = (medicalVal === "above65") ? 2500 : 1500;
+  allowances.push({
+    name: "চিকিৎসা ভাতা",
+    detail: (medicalVal === "above65") ? "৬৫ বছরের উপরে" : "৬৫ বছরের নিচে",
+    amount: medicalAmount
+  });
+  total += medicalAmount;
+
+  // ৩. যাতায়াত ভাতা
+  const isLowerGrade = (gradeIdx >= 10 && gradeIdx <= 19);
+  const transportAmount = isLowerGrade ? 300 : 0;
+  allowances.push({
+    name: "যাতায়াত ভাতা",
+    detail: isLowerGrade ? "গ্রেড ১১-২০" : "প্রযোজ্য নয়",
+    amount: transportAmount
+  });
+  total += transportAmount;
+
+  // ৪. টিফিন ভাতা
+  const tiffinAmount = isLowerGrade ? 200 : 0;
+  allowances.push({
+    name: "টিফিন ভাতা",
+    detail: isLowerGrade ? "গ্রেড ১১-২০" : "প্রযোজ্য নয়",
+    amount: tiffinAmount
+  });
+  total += tiffinAmount;
+
+  // ৫. শিক্ষা ভাতা
+  const eduVal = document.getElementById("listEducation").value;
+  const eduAmount = (eduVal === "1") ? 500 : (eduVal === "2") ? 1000 : 0;
+  allowances.push({
+    name: "শিক্ষা ভাতা",
+    detail: (eduVal === "1") ? "১টি সন্তান" : (eduVal === "2") ? "২টি সন্তান" : "সন্তান নেই",
+    amount: eduAmount
+  });
+  total += eduAmount;
+
+  // ৬. রেশন ভাতা
+  const rationAmount = isLowerGrade ? 50 : 0;
+  allowances.push({
+    name: "রেশন ভাতা",
+    detail: isLowerGrade ? "গ্রেড ১১-২০" : "প্রযোজ্য নয়",
+    amount: rationAmount
+  });
+  total += rationAmount;
+
+  // ৭. বাংলা নববর্ষ ভাতা
+  const noboOn = document.getElementById("togNoboBorsho").checked;
+  const noboAmount = noboOn ? Math.round(val2 * 20 / 100) : 0;
+  allowances.push({
+    name: "বাংলা নববর্ষ ভাতা",
+    detail: noboOn ? "২০% × " + enToBnDigits(val2) : "প্রযোজ্য নয়",
+    amount: noboAmount
+  });
+  total += noboAmount;
+
+  // ৮. কার্যভার ভাতা
+  const karjoOn = document.getElementById("togKarjovhar").checked;
+  let karjoAmount = 0;
+  if(karjoOn){
+    karjoAmount = Math.round(val2 * 10 / 100);
+    if(karjoAmount > 1500) karjoAmount = 1500;
+  }
+  allowances.push({
+    name: "কার্যভার ভাতা",
+    detail: karjoOn ? "১০% (সর্বোচ্চ ৳১৫০০)" : "প্রযোজ্য নয়",
+    amount: karjoAmount
+  });
+  total += karjoAmount;
+
+  // ৯. উৎসব ভাতা
+  const utshobVal = document.getElementById("listUtshob").value;
+  let utshobMultiplier = 0;
+  let utshobDetail = "প্রযোজ্য নয়";
+  if(utshobVal === "muslim"){
+    utshobMultiplier = 1;
+    utshobDetail = "১× (" + enToBnDigits(val2) + ")";
+  } else if(utshobVal === "other"){
+    utshobMultiplier = 2;
+    utshobDetail = "২× (" + enToBnDigits(val2) + ")";
+  }
+  const utshobAmount = (isNaN(val2) || utshobMultiplier === 0) ? 0 : Math.round(val2 * utshobMultiplier);
+  allowances.push({
+    name: "উৎসব ভাতা",
+    detail: utshobDetail,
+    amount: utshobAmount
+  });
+  total += utshobAmount;
+
+  // ১০. শ্রান্তি বিনোদন ভাতা
+  const srantiOn = document.getElementById("togSranti").checked;
+  const srantiAmount = srantiOn && !isNaN(val2) ? val2 : 0;
+  allowances.push({
+    name: "শ্রান্তি বিনোদন ভাতা",
+    detail: srantiOn ? "২য় লিস্টের মান" : "প্রযোজ্য নয়",
+    amount: srantiAmount
+  });
+  total += srantiAmount;
+
+  // ১১. ধোলাই ভাতা (নতুন)
+  const dholaiVal = document.getElementById("listDholai").value;
+  const dholaiAmount = (dholaiVal === "yes") ? 100 : 0;
+  allowances.push({
+    name: "ধোলাই ভাতা",
+    detail: (dholaiVal === "yes") ? "প্রযোজ্য" : "প্রযোজ্য নয়",
+    amount: dholaiAmount
+  });
+  total += dholaiAmount;
+
+  // ১২. আপ্যায়ন ভাতা (নতুন)
+  const apyayonVal = document.getElementById("listApyayon").value;
+  let apyayonAmount = 0;
+  let apyayonDetail = "প্রযোজ্য নয়";
+  if(apyayonVal === "minister"){ apyayonAmount = 2000; apyayonDetail = "মন্ত্রী পরিষদ সচিব/মুখ্যসচিব"; }
+  else if(apyayonVal === "secretary"){ apyayonAmount = 1000; apyayonDetail = "সিনিয়র সচিব/সচিব"; }
+  else if(apyayonVal === "addl"){ apyayonAmount = 900; apyayonDetail = "অতিরিক্ত সচিব"; }
+  else if(apyayonVal === "joint"){ apyayonAmount = 600; apyayonDetail = "যুগ্ম সচিব/অন্যান্য"; }
+  allowances.push({
+    name: "আপ্যায়ন ভাতা",
+    detail: apyayonDetail,
+    amount: apyayonAmount
+  });
+  total += apyayonAmount;
+
+  // ১৩. ডোমেস্টিক এইড এলাউন্স (নতুন)
+  const domesticVal = document.getElementById("listDomestic").value;
+  const domesticAmount = (domesticVal === "yes") ? 3000 : 0;
+  allowances.push({
+    name: "ডোমেস্টিক এইড এলাউন্স",
+    detail: (domesticVal === "yes") ? "প্রযোজ্য" : "প্রযোজ্য নয়",
+    amount: domesticAmount
+  });
+  total += domesticAmount;
+
+  // ১৪. পাহাড়ি ভাতা (নতুন) — মূলবেতনের ২০%, সর্বোচ্চ সীমা প্রযোজ্য
+  const pahariVal = document.getElementById("listPahari").value;
+  let pahariAmount = 0;
+  let pahariDetail = "প্রযোজ্য নয়";
+  if(pahariVal === "sadar"){
+    const calc = Math.round(val2 * 20 / 100);
+    pahariAmount = Math.min(calc, 3000);
+    pahariDetail = "২০% × " + enToBnDigits(val2) + " (সর্বোচ্চ ৳৩০০০)";
+  } else if(pahariVal === "other"){
+    const calc = Math.round(val2 * 20 / 100);
+    pahariAmount = Math.min(calc, 5000);
+    pahariDetail = "২০% × " + enToBnDigits(val2) + " (সর্বোচ্চ ৳৫০০০)";
+  }
+  allowances.push({
+    name: "পাহাড়ি ভাতা",
+    detail: pahariDetail,
+    amount: pahariAmount
+  });
+  total += pahariAmount;
+
+  // ভাতার তালিকা রেন্ডার
+  const listEl = document.getElementById("allowanceList");
+  listEl.innerHTML = "";
+  allowances.forEach(a=>{
+    const row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = `
+      <span class="lbl">${a.name}<br><small style="font-size:10.5px;opacity:.7;">${a.detail}</small></span>
+      <span class="val ${a.amount>0?'on':'off'}">${a.amount>0?taka(a.amount):'—'}</span>
+    `;
+    listEl.appendChild(row);
+  });
+
+  // মোট ভাতা
+  const totalRow = document.createElement("div");
+  totalRow.className = "item";
+  totalRow.style.borderTop = "2px solid var(--primary)";
+  totalRow.style.marginTop = "6px";
+  totalRow.style.paddingTop = "10px";
+  totalRow.innerHTML = `
+    <span class="lbl" style="color:var(--primary);font-weight:800;">মোট ভাতা</span>
+    <span class="val" style="color:var(--primary);font-size:15px;">${taka(total)}</span>
+  `;
+  listEl.appendChild(totalRow);
+
+  // ===== ধাপভিত্তিক ভাতাসহ মোট বেতন =====
+
+  // ১ম ধাপ
+  const step1WithAllow = (!isNaN(step1Total)) ? step1Total + total : NaN;
+  document.getElementById("outStep1Total").textContent = isNaN(step1WithAllow) ? "৳০" : taka(step1WithAllow);
+  document.getElementById("step1Breakdown").textContent =
+    (isNaN(step1Total) ? "—" : taka(step1Total) + " + " + taka(total)) + " =";
+
+  // ২য় ধাপ
+  const step2WithAllow = (!isNaN(step2Total)) ? step2Total + total : NaN;
+  document.getElementById("outStep2Total").textContent = isNaN(step2WithAllow) ? "৳০" : taka(step2WithAllow);
+  document.getElementById("step2Breakdown").textContent =
+    (isNaN(step2Total) ? "—" : taka(step2Total) + " + " + taka(total)) + " =";
+
+  // ৩য় ধাপ = ইনক্রিমেন্টসহ মূলবেতন + মোট ভাতা
+  const step3WithAllow = (!isNaN(incrementVal)) ? incrementVal + total : NaN;
+  document.getElementById("outStep3Total").textContent = isNaN(step3WithAllow) ? "৳০" : taka(step3WithAllow);
+  document.getElementById("step3Breakdown").textContent =
+    (isNaN(incrementVal) ? "—" : taka(incrementVal) + " + " + taka(total)) + " =";
+}
+
+/* ============ ইভেন্ট ============ */
 function onGradeChange(){
   const idx = document.getElementById("list1").value;
   fillSelect("list2", list2Steps[idx], true);
@@ -624,9 +1088,25 @@ function onGradeChange(){
   updateOutputs();
 }
 
+fillSelect("list1", list1);
+fillSelect("list4", list4);
+
+document.getElementById("list1").addEventListener("change", onGradeChange);
 document.getElementById("list2").addEventListener("change", updateOutputs);
 document.getElementById("list3").addEventListener("change", updateOutputs);
-document.getElementById("list1").addEventListener("change", onGradeChange);
+document.getElementById("list4").addEventListener("change", updateOutputs);
+
+document.getElementById("listMedical").addEventListener("change", updateOutputs);
+document.getElementById("listEducation").addEventListener("change", updateOutputs);
+document.getElementById("listUtshob").addEventListener("change", updateOutputs);
+document.getElementById("listDholai").addEventListener("change", updateOutputs);
+document.getElementById("listApyayon").addEventListener("change", updateOutputs);
+document.getElementById("listDomestic").addEventListener("change", updateOutputs);
+document.getElementById("listPahari").addEventListener("change", updateOutputs);
+
+document.getElementById("togNoboBorsho").addEventListener("change", updateOutputs);
+document.getElementById("togKarjovhar").addEventListener("change", updateOutputs);
+document.getElementById("togSranti").addEventListener("change", updateOutputs);
 
 onGradeChange();
 </script>
