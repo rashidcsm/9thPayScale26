@@ -341,9 +341,153 @@
     display:none;
   }
   .house-note.show{display:block;}
+
+  /* ===== স্বাগত পপ-আপ ===== */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.65);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:9999;
+    opacity:1;
+    transition:opacity .3s ease;
+  }
+  .modal-overlay.hidden{
+    opacity:0;
+    pointer-events:none;
+  }
+  .modal-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    max-width:520px;
+    width:100%;
+    max-height:88vh;
+    overflow-y:auto;
+    padding:22px 20px 18px;
+    position:relative;
+    animation:modalIn .35s ease;
+  }
+  @keyframes modalIn{
+    from{opacity:0;transform:translateY(20px) scale(.96);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .modal-box::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,var(--primary),var(--purple),var(--accent));
+    border-radius:18px 18px 0 0;
+  }
+  .modal-header{
+    text-align:center;
+    margin-bottom:14px;
+  }
+  .modal-icon{
+    width:56px;height:56px;
+    margin:0 auto 10px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--purple));
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;
+    box-shadow:0 6px 20px rgba(37,99,235,.4);
+  }
+  .modal-title{
+    font-size:17px;
+    font-weight:800;
+    color:var(--primary);
+    margin:0 0 4px;
+  }
+  .modal-subtitle{
+    font-size:11.5px;
+    color:var(--muted);
+    font-weight:600;
+  }
+  .modal-rules{
+    list-style:none;
+    padding:0;
+    margin:14px 0 16px;
+    counter-reset:rule;
+  }
+  .modal-rules li{
+    position:relative;
+    padding:9px 10px 9px 38px;
+    font-size:13px;
+    line-height:1.55;
+    color:var(--text);
+    border-bottom:1px dashed var(--border);
+    counter-increment:rule;
+  }
+  .modal-rules li:last-child{border-bottom:none;}
+  .modal-rules li::before{
+    content:counter(rule);
+    position:absolute;
+    left:4px;top:9px;
+    width:24px;height:24px;
+    border-radius:50%;
+    background:var(--primary-light);
+    color:var(--primary);
+    font-weight:800;
+    font-size:12px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .modal-rules li strong{color:var(--primary);font-weight:800;}
+  .modal-footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .modal-btn{
+    width:100%;
+    padding:13px 20px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--primary),var(--purple));
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.4px;
+    cursor:pointer;
+    box-shadow:0 6px 20px rgba(37,99,235,.35);
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .modal-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,99,235,.45);}
+  .modal-btn:active{transform:translateY(0);}
+  body.modal-open{overflow:hidden;}
 </style>
 </head>
 <body>
+
+<!-- স্বাগত ব্যবহারবিধি পপ-আপ -->
+<div class="modal-overlay" id="welcomeModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-icon">📋</div>
+      <h2 class="modal-title">সফটওয়্যারটি ব্যবহারের নিয়ম</h2>
+      <div class="modal-subtitle">৯ম জাতীয় বেতন স্কেল ২০২৬ — বেতন ও ভাতা ক্যালকুলেটর</div>
+    </div>
+    <ul class="modal-rules">
+      <li><strong>প্রথম লিস্ট পিকার</strong> থেকে আপনি আপনার বর্তমান গ্রেড নির্বাচন করুন।</li>
+      <li><strong>২য় লিস্ট পিকার</strong> থেকে ৩০ জুন, ২০২৬ তারিখে যে বেসিক পেয়েছেন, সেটা সিলেক্ট করবেন।</li>
+      <li><strong>৩য় লিস্ট পিকারে</strong> থাকা মান চেঞ্জ করার দরকার নেই। সেখানে যে মান আসবে, সেটাই আপনার ৯ম পে-স্কেলে বর্ধিত বেসিক।</li>
+      <li><strong>৪র্থ লিস্ট পিকার</strong> থেকে আপনি কোন সিটিতে জব করছেন, তা নির্বাচন করবেন। সিটির বাইরে হলে <strong>"অন্যান্য"</strong> নির্বাচন করবেন।</li>
+      <li><strong>বাসা অপশন</strong> থেকে সরকারি বাসা ব্যবহার করেন কিনা, তা নির্বাচন করবেন।</li>
+      <li><strong>ভাতা অপশন</strong> থেকে যেসব ভাতা আপনার জন্য প্রযোজ্য, সেগুলো নির্বাচন করবেন।</li>
+    </ul>
+    <div class="modal-footer">আপাতত এই পর্যন্ত কাজ সম্পন্ন করলেই আপনার কাঙ্ক্ষিত বেতন ও ভাতা দেখতে পাবেন। ধন্যবাদ।</div>
+    <button class="modal-btn" id="modalCloseBtn">✔ বুঝেছি, শুরু করুন</button>
+  </div>
+</div>
 
 <header>
   <h1>৯ম জাতীয় বেতন স্কেল ২০২৬</h1>
@@ -709,7 +853,7 @@ function fillSelect(id, arr, withStep){
   });
 }
 
-/* ============ ঘর ভাড়া হিসাব (নতুন নিয়ম) ============ */
+/* ============ ঘর ভাড়া হিসাব ============ */
 function calcHouseRent(workplace, val2){
   if(isNaN(val2)) return {amount:0, percent:0, label:"", floor:0};
 
@@ -1115,6 +1259,30 @@ document.getElementById("houseType").addEventListener("change", onHouseTypeChang
 
 onGradeChange();
 onHouseTypeChange();
+
+/* ============ স্বাগত পপ-আপ ============ */
+(function initWelcomeModal(){
+  const modal = document.getElementById("welcomeModal");
+  const closeBtn = document.getElementById("modalCloseBtn");
+
+  document.body.classList.add("modal-open");
+
+  function closeModal(){
+    modal.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+    setTimeout(()=>{ modal.style.display = "none"; }, 350);
+  }
+
+  closeBtn.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (e)=>{
+    if(e.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", (e)=>{
+    if(e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+  });
+})();
 </script>
 </body>
 </html>
