@@ -32,7 +32,8 @@
     }
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html,body{overflow-x:hidden;width:100%;max-width:100%;}
+  html{overflow-x:hidden;width:100%;max-width:100%;}
+  body{overflow-x:clip;width:100%;max-width:100%;}
   body{
     margin:0;font-family:'SolaimanLipi','Noto Sans Bengali','Hind Siliguri',system-ui,-apple-system,sans-serif;
     background:var(--bg);color:var(--text);line-height:1.5;
@@ -245,6 +246,85 @@
   .house-rent-label .lbl-text{flex:1;display:flex;align-items:center;gap:7px;min-width:0;}
   .house-rent-label .lbl-value{font-size:16px;font-weight:900;color:var(--primary);
     white-space:nowrap;font-variant-numeric:tabular-nums;}
+  /* ===== ড্যাশবোর্ড ===== */
+  .dash-wrap{max-width:700px;margin:12px auto 0;padding:0 12px;}
+  .dboard{position:relative;overflow:hidden;border-radius:18px;padding:14px;color:#fff;
+    background:linear-gradient(135deg,#1e40af 0%,#2563eb 50%,#7c3aed 100%);
+    box-shadow:0 12px 32px rgba(37,99,235,.3),0 4px 12px rgba(124,58,237,.2);}
+  .dboard::before{content:"";position:absolute;top:-50px;right:-40px;width:150px;height:150px;
+    background:radial-gradient(circle,rgba(255,255,255,.22),transparent 70%);border-radius:50%;pointer-events:none;}
+  .dboard::after{content:"";position:absolute;bottom:-60px;left:-40px;width:140px;height:140px;
+    background:radial-gradient(circle,rgba(245,158,11,.3),transparent 70%);border-radius:50%;pointer-events:none;}
+  .dboard-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .dboard-title{font-size:13px;font-weight:800;letter-spacing:.2px;}
+  .dboard-period{font-size:10.5px;font-weight:600;background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.25);padding:3px 9px;border-radius:999px;line-height:1.4;}
+  .step-chips{position:relative;z-index:1;display:flex;gap:6px;margin-bottom:10px;}
+  .chip{flex:1 1 0;min-width:0;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);
+    color:#fff;border-radius:12px;padding:7px 4px;font-family:inherit;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:1px;transition:all .2s ease;}
+  .chip .c1{font-size:12px;font-weight:800;line-height:1.3;}
+  .chip .c2{font-size:9.5px;opacity:.85;font-weight:600;white-space:nowrap;line-height:1.3;}
+  .chip.active{background:#fff;color:#1e40af;border-color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);}
+  .chip.active .c2{opacity:.9;}
+  .db-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .db-tile{border-radius:12px;padding:9px 11px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);min-width:0;}
+  .db-tile .db-lbl{font-size:10.5px;font-weight:700;opacity:.9;line-height:1.35;display:flex;align-items:center;gap:4px;}
+  .db-tile .db-val{font-size:clamp(15px,4.6vw,19px);font-weight:900;margin-top:3px;letter-spacing:-.3px;
+    font-variant-numeric:tabular-nums;line-height:1.25;word-break:break-word;}
+  .db-tile.total{background:linear-gradient(135deg,#fde68a,#f59e0b);color:#451a03;border-color:transparent;
+    box-shadow:0 6px 18px rgba(245,158,11,.4);}
+  .db-tile.allow .db-val{color:#bbf7d0;}
+  .db-tile.ded .db-val{color:#fecaca;}
+  /* ===== ট্যাব বার ===== */
+  .tabbar{position:sticky;top:0;z-index:50;background:var(--bg);padding:10px 0 8px;margin-top:6px;
+    border-bottom:1px solid var(--border);}
+  .tabs{max-width:700px;margin:0 auto;padding:0 12px;display:flex;gap:8px;overflow-x:auto;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;padding:8px 13px 8px 9px;
+    border:1.5px solid var(--border);background:var(--card);color:var(--muted);border-radius:999px;
+    font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;
+    scroll-snap-align:center;transition:all .2s ease;}
+  .tab .box{width:17px;height:17px;border-radius:5px;border:2px solid var(--border);display:inline-flex;
+    align-items:center;justify-content:center;font-size:11px;font-weight:900;color:transparent;
+    transition:all .2s ease;flex:0 0 auto;line-height:1;}
+  .tab.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary);}
+  .tab.active .box{background:var(--primary);border-color:var(--primary);color:#fff;}
+  /* ===== পেজ ===== */
+  .container{min-height:55vh;}
+  .page{display:none;}
+  .page.active{display:block;}
+  .page.from-right{animation:slideInR .28s ease;}
+  .page.from-left{animation:slideInL .28s ease;}
+  @keyframes slideInR{from{opacity:0;transform:translateX(28px);}to{opacity:1;transform:translateX(0);}}
+  @keyframes slideInL{from{opacity:0;transform:translateX(-28px);}to{opacity:1;transform:translateX(0);}}
+  .pager-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px;}
+  .pager-nav button{flex:0 0 auto;padding:10px 16px;border:1.5px solid var(--border);border-radius:12px;
+    background:var(--card);color:var(--primary);font-family:inherit;font-size:12.5px;font-weight:800;
+    cursor:pointer;box-shadow:var(--shadow);transition:all .2s ease;}
+  .pager-nav button:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;}
+  .pager-nav .dots{display:flex;gap:6px;align-items:center;}
+  .pager-nav .dots i{width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .2s ease;display:block;}
+  .pager-nav .dots i.on{width:20px;border-radius:4px;background:var(--primary);}
+  .total-badge,.step-total-list{display:none !important;}
+  .amt-input{width:130px;max-width:45%;padding:9px 10px;border:1.5px solid var(--border);
+    border-radius:var(--radius-sm);background:var(--bg);font-size:13.5px;color:var(--text);
+    font-family:inherit;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;
+    transition:border-color .2s,background .2s,box-shadow .2s;}
+  .amt-input:focus{outline:none;border-color:var(--primary);background:var(--card);box-shadow:0 0 0 3px var(--primary-light);}
+  .mileage-row{margin-top:12px;padding-top:4px;border-top:1px dashed var(--border);}
+  .ded-summary{margin-top:12px;display:flex;flex-direction:column;gap:8px;}
+  .ded-line{border-radius:12px;padding:12px 14px;display:flex;align-items:center;
+    justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .ded-line .lbl-text{font-size:12.5px;font-weight:800;flex:1;min-width:0;line-height:1.4;}
+  .ded-line .lbl-value{font-size:17px;font-weight:900;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .ded-line.total{background:linear-gradient(135deg,var(--danger-light),#fef2f2);border:1.5px solid var(--danger);}
+  .ded-line.total .lbl-text,.ded-line.total .lbl-value{color:var(--danger);}
+  .ded-line.remain{background:linear-gradient(135deg,var(--success-light),#ecfdf5);border:1.5px solid var(--success);}
+  .ded-line.remain .lbl-text,.ded-line.remain .lbl-value{color:var(--success);}
+  .ded-note{font-size:11px;color:var(--muted);font-weight:600;line-height:1.5;text-align:center;}
   .modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.7);
     backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
     display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999;
@@ -282,6 +362,23 @@
   .modal-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,99,235,.45);}
   .modal-btn:active{transform:translateY(0);}
   body.modal-open{overflow:hidden;}
+  /* ===== প্রতিটি অংশের (সারি/বক্স) আলাদা রঙের চিকন বর্ডার ===== */
+  :is(.allowance-list .item,.toggle-row,.picker-col,.dash-item){--rc:#3b82f6;}
+  :is(.allowance-list .item,.toggle-row,.picker-col,.dash-item):nth-child(7n+2){--rc:#f59e0b;}
+  :is(.allowance-list .item,.toggle-row,.picker-col,.dash-item):nth-child(7n+3){--rc:#10b981;}
+  :is(.allowance-list .item,.toggle-row,.picker-col,.dash-item):nth-child(7n+4){--rc:#8b5cf6;}
+  :is(.allowance-list .item,.toggle-row,.picker-col,.dash-item):nth-child(7n+5){--rc:#ef4444;}
+  :is(.allowance-list .item,.toggle-row,.picker-col,.dash-item):nth-child(7n+6){--rc:#14b8a6;}
+  :is(.allowance-list .item,.toggle-row,.picker-col,.dash-item):nth-child(7n+7){--rc:#ec4899;}
+  .allowance-list .item,.toggle-row{
+    border:1.5px solid var(--rc) !important;border-radius:12px;padding:10px 12px !important;margin-bottom:8px;
+    background:color-mix(in srgb,var(--rc) 5%,transparent);}
+  .allowance-list .item:last-child,.toggle-row:last-child{margin-bottom:0;}
+  .picker-col{border:1.5px solid var(--rc);border-radius:12px;padding:10px;
+    background:color-mix(in srgb,var(--rc) 5%,transparent);}
+  .dash-item:not([class*="highlight"]){border:1.5px solid var(--rc);}
+  .card{border:1.5px solid var(--bc,var(--border));}
+  .card .card-title{border-bottom-color:var(--border);border-bottom-color:color-mix(in srgb,var(--bc,#94a3b8) 30%,transparent);}
   .hidden-section{display:none !important;}
 </style>
 </head>
@@ -322,7 +419,35 @@
   </div>
 </div>
 
+<div class="dash-wrap">
+  <div class="dboard">
+    <div class="dboard-head">
+      <span class="dboard-title">📊 বেতন ড্যাশবোর্ড</span>
+      <span class="dboard-period" id="dbPeriod">—</span>
+    </div>
+    <div class="step-chips" id="dbChips"></div>
+    <div class="db-grid">
+      <div class="db-tile main"><div class="db-lbl">💰 মূল বেতন</div><div class="db-val" id="dbBasic">৳০</div></div>
+      <div class="db-tile total"><div class="db-lbl">💎 মোট বেতন</div><div class="db-val" id="dbTotal">৳০</div></div>
+      <div class="db-tile allow"><div class="db-lbl">🎁 মোট ভাতা</div><div class="db-val" id="dbAllow">৳০</div></div>
+      <div class="db-tile ded"><div class="db-lbl">✂️ মোট কর্তন</div><div class="db-val" id="dbDed">৳০</div></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabbar" id="tabbar" aria-label="পেজ নির্বাচন">
+  <div class="tabs" role="tablist" id="tabs">
+    <button class="tab active" type="button" role="tab" data-page="0"><span class="box">✓</span>মূল বেতন ও স্কেল</button>
+    <button class="tab" type="button" role="tab" data-page="1"><span class="box">✓</span>হিসাবের সারসংক্ষেপ</button>
+    <button class="tab" type="button" role="tab" data-page="2"><span class="box">✓</span>ভাতা সংক্রান্ত তথ্য</button>
+    <button class="tab" type="button" role="tab" data-page="3"><span class="box">✓</span>প্রাপ্ত ভাতার তালিকা</button>
+    <button class="tab" type="button" role="tab" data-page="4"><span class="box">✓</span>কর্তন</button>
+  </div>
+</nav>
+
 <div class="container">
+<div class="pages" id="pages">
+<section class="page active" data-page="0">
 
   <div id="card2026_top">
 
@@ -341,62 +466,15 @@
           <label><span class="dot green"></span>৯ম জাতীয় পে-স্কেল ২০২৬ এ বর্ধিত মূলবেতন</label>
           <select id="list3"></select>
         </div>
-        <div class="picker-col full" id="list4Wrap">
-          <label><span class="dot purple"></span>কর্মস্থল নির্বাচন (ঘর ভাড়ার জন্য)</label>
-          <select id="list4"></select>
-        </div>
       </div>
     </div>
 
-    <div class="card" id="cardResult2026">
-      <div class="card-title"><span class="title-icon">📊</span> মূল বেতন হিসাবের সারসংক্ষেপ</div>
-
-      <div class="dash-grid">
-        <div class="dash-item highlight-danger">
-          <div class="dash-label"><span class="icon">📉</span>পার্থক্য 'ক'</div>
-          <div class="dash-value" id="outDiff">—</div>
-        </div>
-        <div class="dash-item highlight-primary">
-          <div class="dash-label"><span class="icon">💰</span>৯ম পে-স্কেল ২০২৬ এ বেসিক 'খ'</div>
-          <div class="dash-value" id="outCurrent">—</div>
-        </div>
-      </div>
-
-      <div class="dash-grid" style="margin-top:8px;">
-        <div class="dash-item highlight-accent">
-          <div class="dash-label"><span class="icon">➕</span>যোগফল ক ও খ এর যোগফল</div>
-          <div class="dash-value" id="outSum">—</div>
-        </div>
-        <div class="dash-item highlight-purple">
-          <div class="dash-label"><span class="icon">🎯</span><span id="labelMool">অনুরুপ ধাপ পাওয়া গেছে</span></div>
-          <div class="dash-value" id="outMool">—</div>
-        </div>
-        <div class="dash-item highlight-success">
-          <div class="dash-label"><span class="icon">✅</span>ইনক্রিমেন্টসহ ০১-০৭-২০২৬ মূলবেতন</div>
-          <div class="dash-value" id="outNext">—</div>
-        </div>
-        <div class="dash-item highlight-danger">
-          <div class="dash-label"><span class="icon">📈</span>বেতন বাড়লো</div>
-          <div class="dash-value" id="outRaise">—</div>
-        </div>
-      </div>
-
-      <div class="dash-grid" style="margin-top:8px;">
-        <div class="dash-item">
-          <div class="dash-label"><span class="icon">1️⃣</span>১ম ধাপ · ০১-০৭-২০২৬ হতে ৩১-১২-২০২৬</div>
-          <div class="dash-value" id="outHalfYear">—</div>
-        </div>
-        <div class="dash-item">
-          <div class="dash-label"><span class="icon">2️⃣</span>২য় ধাপ · ০১-০১-২০২৭ হতে ৩০-০৬-২০২৭</div>
-          <div class="dash-value" id="outNextHalf">—</div>
-        </div>
-        <div class="dash-item">
-          <div class="dash-label"><span class="icon">3️⃣</span>৩য় ধাপ · ০১-০৭-২০২৭ হতে</div>
-          <div class="dash-value" id="outSum2">—</div>
-        </div>
-        <div class="dash-item highlight-success">
-          <div class="dash-label"><span class="icon">🏁</span>ইনক্রিমেন্টসহ মূলবেতন (০১-০৭-২০২৭ হতে)</div>
-          <div class="dash-value" id="outIncrement">—</div>
+    <div class="card">
+      <div class="card-title purple"><span class="title-icon">📍</span> কর্মস্থল নির্বাচন</div>
+      <div class="picker-row">
+        <div class="picker-col full" id="list4Wrap">
+          <label><span class="dot purple"></span>কর্মস্থল (ঘর ভাড়ার জন্য)</label>
+          <select id="list4"></select>
         </div>
       </div>
     </div>
@@ -418,6 +496,78 @@
       </div>
     </div>
   </div>
+  </section>
+
+  <section class="page" data-page="1">
+  <div class="card hidden-section" id="summary2028Note">
+    <div class="card-title"><span class="title-icon">ℹ️</span> হিসাবের সারসংক্ষেপ</div>
+    <div style="font-size:12.5px;color:var(--muted);line-height:1.6;">২০২৮ মোডে ধাপভিত্তিক সারসংক্ষেপ প্রযোজ্য নয়। ০১-০১-২০২৮ থেকে প্রযোজ্য মূল বেতন ও মোট বেতন উপরের ড্যাশবোর্ডে দেখুন।</div>
+  </div>
+  <div id="card2026_result">
+    <div class="card" id="cardResult2026">
+      <div class="card-title"><span class="title-icon">📊</span> পার্থক্য ও বর্ধিত বেসিক</div>
+
+      <div class="dash-grid">
+        <div class="dash-item highlight-danger">
+          <div class="dash-label"><span class="icon">📉</span>পার্থক্য 'ক'</div>
+          <div class="dash-value" id="outDiff">—</div>
+        </div>
+        <div class="dash-item highlight-primary">
+          <div class="dash-label"><span class="icon">💰</span>৯ম পে-স্কেল ২০২৬ এ বেসিক 'খ'</div>
+          <div class="dash-value" id="outCurrent">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title purple"><span class="title-icon">🎯</span> ধাপ নির্ধারণ ও বেতন বৃদ্ধি</div>
+      <div class="dash-grid">
+        <div class="dash-item highlight-accent">
+          <div class="dash-label"><span class="icon">➕</span>যোগফল ক ও খ এর যোগফল</div>
+          <div class="dash-value" id="outSum">—</div>
+        </div>
+        <div class="dash-item highlight-purple">
+          <div class="dash-label"><span class="icon">🎯</span><span id="labelMool">অনুরুপ ধাপ পাওয়া গেছে</span></div>
+          <div class="dash-value" id="outMool">—</div>
+        </div>
+        <div class="dash-item highlight-success">
+          <div class="dash-label"><span class="icon">✅</span>ইনক্রিমেন্টসহ ০১-০৭-২০২৬ মূলবেতন</div>
+          <div class="dash-value" id="outNext">—</div>
+        </div>
+        <div class="dash-item highlight-danger">
+          <div class="dash-label"><span class="icon">📈</span>বেতন বাড়লো</div>
+          <div class="dash-value" id="outRaise">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title green"><span class="title-icon">🪜</span> ধাপভিত্তিক মূলবেতন</div>
+      <div class="dash-grid">
+        <div class="dash-item">
+          <div class="dash-label"><span class="icon">1️⃣</span>১ম ধাপ · ০১-০৭-২০২৬ হতে ৩১-১২-২০২৬</div>
+          <div class="dash-value" id="outHalfYear">—</div>
+        </div>
+        <div class="dash-item">
+          <div class="dash-label"><span class="icon">2️⃣</span>২য় ধাপ · ০১-০১-২০২৭ হতে ৩০-০৬-২০২৭</div>
+          <div class="dash-value" id="outNextHalf">—</div>
+        </div>
+        <div class="dash-item">
+          <div class="dash-label"><span class="icon">3️⃣</span>৩য় ধাপ · ০১-০৭-২০২৭ হতে</div>
+          <div class="dash-value" id="outSum2">—</div>
+        </div>
+        <div class="dash-item highlight-success">
+          <div class="dash-label"><span class="icon">🏁</span>ইনক্রিমেন্টসহ মূলবেতন (০১-০৭-২০২৭ হতে)</div>
+          <div class="dash-value" id="outIncrement">—</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </section>
+
+  <section class="page" data-page="2">
 
   <div class="card">
     <div class="title-with-picker">
@@ -428,7 +578,11 @@
       </select>
     </div>
 
+  </div>
+
     <div id="mode2026">
+    <div class="card">
+      <div class="card-title green"><span class="title-icon">🩺</span> চিকিৎসা ও সরকারি বাসা</div>
       <div class="picker-row">
         <div class="picker-col full">
           <label><span class="dot green"></span>চিকিৎসা ভাতা (বয়স অনুযায়ী)</label>
@@ -448,8 +602,11 @@
           <div class="house-note" id="houseNote2026">সরকারি বাসা আছে — ঘরভাড়া ভাতা প্রাপ্য নয়।</div>
         </div>
       </div>
+    </div>
 
-      <div style="margin-top:12px;">
+    <div class="card">
+      <div class="card-title"><span class="title-icon">📚</span> শিক্ষা ও নববর্ষ ভাতা</div>
+      <div>
         <div class="toggle-row">
           <div class="toggle-label">শিক্ষা ভাতা <small>(সন্তান সংখ্যা)</small></div>
           <select id="listEducation2026" style="max-width:140px;">
@@ -462,6 +619,12 @@
           <div class="toggle-label">বাংলা নববর্ষ ভাতা <small>(২য় লিস্টের ২০%)</small></div>
           <label class="switch orange"><input type="checkbox" id="togNoboBorsho2026"><span class="slider"></span></label>
         </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title purple"><span class="title-icon">💼</span> কার্যভার, উৎসব ও বিনোদন</div>
+      <div>
         <div class="toggle-row">
           <div class="toggle-label">কার্যভার ভাতা <small>(১০%, সর্বোচ্চ ৳১৫০০)</small></div>
           <label class="switch purple"><input type="checkbox" id="togKarjovhar2026"><span class="slider"></span></label>
@@ -478,6 +641,12 @@
           <div class="toggle-label">শ্রান্তি বিনোদন ভাতা</div>
           <label class="switch green"><input type="checkbox" id="togSranti2026"><span class="slider"></span></label>
         </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title accent"><span class="title-icon">🎁</span> অন্যান্য ভাতা</div>
+      <div>
         <div class="toggle-row">
           <div class="toggle-label">ধোলাই ভাতা <small>(প্রযোজ্য হলে ৳১০০)</small></div>
           <select id="listDholai2026" style="max-width:150px;">
@@ -512,8 +681,11 @@
         </div>
       </div>
     </div>
+    </div>
 
     <div id="mode2028" class="hidden-section">
+    <div class="card">
+      <div class="card-title red"><span class="title-icon">🏠</span> ঘরভাড়া</div>
       <div class="picker-row">
         <div class="picker-col full">
           <label><span class="dot red"></span>ঘরভাড়া</label>
@@ -535,8 +707,11 @@
         <span class="lbl-text"><span class="icon">🏠</span>ঘর ভাড়া:</span>
         <span class="lbl-value" id="houseRentValue">৳০</span>
       </div>
+    </div>
 
-      <div style="margin-top:12px;">
+    <div class="card">
+      <div class="card-title green"><span class="title-icon">🩺</span> চিকিৎসা, যাতায়াত ও টিফিন</div>
+      <div>
         <div class="toggle-row">
           <div class="toggle-label">চিকিৎসা ভাতা</div>
           <select id="listMedical2028" style="max-width:230px;">
@@ -558,6 +733,12 @@
             <option value="yes">প্রতিষ্ঠান থেকে টিফিন দেয়</option>
           </select>
         </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="title-icon">📚</span> শিক্ষা, ধোলাই ও নববর্ষ ভাতা</div>
+      <div>
         <div class="toggle-row">
           <div class="toggle-label">শিক্ষা ভাতা</div>
           <select id="listEdu2028" style="max-width:150px;">
@@ -577,6 +758,12 @@
           <div class="toggle-label">বাংলা নববর্ষ ভাতা <small>(২য় লিস্টের ১৫%)</small></div>
           <label class="switch orange"><input type="checkbox" id="togNoboBorsho2028"><span class="slider"></span></label>
         </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title purple"><span class="title-icon">💼</span> কার্যভার, উৎসব ও বিনোদন</div>
+      <div>
         <div class="toggle-row">
           <div class="toggle-label">কার্যভার ভাতা <small>(১০%, সর্বোচ্চ ৳১৫০০)</small></div>
           <label class="switch purple"><input type="checkbox" id="togKarjovhar2028"><span class="slider"></span></label>
@@ -596,6 +783,12 @@
             <option value="yes">প্রযোজ্য</option>
           </select>
         </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title accent"><span class="title-icon">⛰️</span> বিশেষ এলাকা ও প্রতিবন্ধী ভাতা</div>
+      <div>
         <div class="toggle-row">
           <div class="toggle-label">পাহাড়ি ভাতা</div>
           <select id="listPahari2028" style="max-width:230px;">
@@ -624,19 +817,77 @@
   </div>
 
   <div class="card">
+    <div class="card-title accent"><span class="title-icon">🛣️</span> মাইলেজ (ম্যানুয়াল)</div>
+    <div class="toggle-row" style="padding-top:0;">
+      <div class="toggle-label">পদ নির্বাচন</div>
+      <select id="mileageRole" style="max-width:200px;">
+        <option value="none">প্রযোজ্য নয়</option>
+        <option value="loco">লোকো মাস্টার</option>
+        <option value="conductor">ট্রেন পরিচালক</option>
+        <option value="tte">ট্রাভেলিং টিকেট এক্সামিনার</option>
+      </select>
+    </div>
+    <div class="toggle-row" style="border-bottom:none;">
+      <div class="toggle-label">মাইলেজ <small>(নিজে লিখুন, না থাকলে ০)</small></div>
+      <input type="text" inputmode="decimal" class="amt-input" id="mileageInput" value="0" placeholder="০" autocomplete="off">
+    </div>
+    <div class="house-rent-label">
+      <span class="lbl-text"><span class="icon">🛣️</span>মোট মাইলেজ =</span>
+      <span class="lbl-value" id="mileageTotalValue">৳০</span>
+    </div>
+    <div class="house-note show" id="mileageNote">পদ নির্বাচন করে মাইলেজ লিখলে হিসাব দেখাবে।</div>
+  </div>
+
+  </section>
+
+  <section class="page" data-page="3">
+  <div class="card">
     <div class="card-title green"><span class="title-icon">📋</span> প্রাপ্ত ভাতার তালিকা</div>
     <div class="allowance-list" id="allowanceList"></div>
-    <div class="total-allowance-badge">
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="title-icon">💵</span> ভাতার মোট</div>
+    <div class="total-allowance-badge" style="margin-top:0;">
       <span class="lbl-text"><span class="icon">💵</span>মোট ভাতা</span>
       <span class="lbl-value" id="totalAllowanceBadge">৳০</span>
     </div>
   </div>
 
+  </section>
+
+  <section class="page" data-page="4">
+  <div id="dedFields"></div>
+
+  <div class="card">
+    <div class="card-title accent"><span class="title-icon">🧮</span> কর্তনের সারসংক্ষেপ</div>
+    <div class="ded-summary" style="margin-top:0;">
+      <div class="ded-line total">
+        <span class="lbl-text">মোট কর্তন :-</span>
+        <span class="lbl-value" id="totalDeductionBadge">৳০</span>
+      </div>
+      <div class="ded-line remain">
+        <span class="lbl-text">অবশিষ্ট : মোট ভাতা − মোট কর্তন =</span>
+        <span class="lbl-value" id="remainingBadge">৳০</span>
+      </div>
+      <div class="ded-note">এই অবশিষ্ট টাকা মূল বেতনের সাথে যোগ হয়ে বেতন নির্ধারণ হবে।</div>
+    </div>
+  </div>
+
+  </section>
+</div>
+
+<div class="pager-nav">
+  <button type="button" id="prevPage">◀ আগের</button>
+  <div class="dots" id="pagerDots"></div>
+  <button type="button" id="nextPage">পরের ▶</button>
+</div>
+
   <div class="total-badge">
     <div class="total-badge-inner">
       <div class="total-badge-label">
         <div class="icon-wrap">💎</div>
-        <span>ভাতাসহ মোট বেতন</span>
+        <span>মূল বেতন + অবশিষ্ট = মোট বেতন</span>
       </div>
       <div class="total-badge-value" id="grandTotalBadge">৳০</div>
     </div>
@@ -814,6 +1065,7 @@ function updateOutputs2026(){
   const val1 = extractNumber(steps2[0]);
   const val2 = extractNumber(steps2[i2]);
   const val3 = extractNumber(steps3[i3]);
+  applyAutoRent(val2);
 
   const diff = val2 - val1;
   document.getElementById("outDiff").textContent = isNaN(diff) ? "—" :
@@ -1082,7 +1334,109 @@ function updateAllowances2028(){
   renderStepTotals2028(scaleValue, total);
 }
 
+function numVal(id){
+  const el = document.getElementById(id);
+  if(!el) return 0;
+  const v = parseFloat(bnToEnDigits(el.value||"").replace(/[^0-9.]/g,""));
+  return isNaN(v) ? 0 : v;
+}
+const dedItems = [
+  ["ded_gpfJoma","জিপিএফ জমা","💰"],["ded_gpfKortan","জিপিএফ কর্তন","🏦"],
+  ["ded_basha","বাসা ভাড়া (সিঙ্গেল)","🏠"],["ded_gas","গ্যাস বিল","🔥"],
+  ["ded_bidyut","বিদ্যুৎ বিল","💡"],["ded_pani","পানি বিল","🚰"],
+  ["ded_kollan","কল্যাণ ট্যাক্স","🤝"],["ded_beni","বেনিভোলেন্ট কর্তন","🏥"],
+  ["ded_home","হোম লোন","🏡"],["ded_car","কার লোন","🚗"],
+  ["ded_computer","কম্পিউটার লোন","💻"],["ded_wazi","ওয়াজিউল্লাহ ইন্সটিটিউট কর্তন","🏛️"],
+  ["ded_stamp","স্ট্যাম্প ফি","🔖"]
+];
+function dedTotal(){ return dedItems.reduce((s,d)=>s+numVal(d[0]),0); }
+function netAdj(){ return mileageTotal() - dedTotal(); }
+/* মাইলেজ: লোকো মাস্টার = ১০০%, ট্রেন পরিচালক/ট্রাভেলিং টিকেট এক্সামিনার = ৭৫% + (৩০-০৬-২০২৬ এর মূলবেতন ÷ ৩০) */
+function basic2026(){
+  const i1 = parseInt(document.getElementById("list1").value,10);
+  const i2 = parseInt(document.getElementById("list2").value,10);
+  return extractNumber((list2Steps[i1] || [])[i2]);
+}
+function mileageCalc(){
+  const role = document.getElementById("mileageRole").value;
+  const v = numVal('mileageInput');
+  const b = basic2026();
+  if(role === "none" || v <= 0 || isNaN(b)) return {total:0, detail:"প্রযোজ্য নয়", note:"পদ নির্বাচন করে মাইলেজ লিখলে হিসাব দেখাবে।"};
+  const pct = (role === "loco") ? 100 : 75;
+  const p1 = v * pct / 100, p2 = b / 30;
+  const total = Math.round(p1 + p2);
+  const txt = enToBnDigits(pct)+"% × "+enToBnDigits(v)+" = "+enToBnDigits(Math.round(p1*100)/100)+"  +  "+enToBnDigits(b)+" ÷ ৩০ = "+enToBnDigits(Math.round(p2*100)/100);
+  return {total, detail: enToBnDigits(pct)+"% × "+enToBnDigits(v)+" + "+enToBnDigits(b)+"÷৩০", note: txt};
+}
+function mileageTotal(){ return mileageCalc().total; }
+function updateMileageUI(){
+  const m = mileageCalc();
+  document.getElementById("mileageTotalValue").textContent = taka(m.total) || "৳০";
+  document.getElementById("mileageNote").textContent = m.note;
+}
+/* বাসা "নেই" বা "সিঙ্গেল" হলে ৩০-০৬-২০২৬ তারিখের মূলবেতনের ৫% অটো বসবে (পরে হাতে বদলানো যাবে) */
+let lastAutoRentKey = "";
+function applyAutoRent(val2){
+  const el = document.getElementById("ded_basha");
+  if(!el) return;
+  const ht = document.getElementById("houseType2026").value;
+  const key = ht + "|" + val2;
+  if(key === lastAutoRentKey) return;
+  lastAutoRentKey = key;
+  const amt = ((ht === "none" || ht === "single") && !isNaN(val2)) ? Math.round(val2 * 5 / 100) : 0;
+  el.value = enToBnDigits(amt);
+}
+function refreshAll(){
+  if(document.getElementById("yearMode").value === "2026") updateOutputs2026();
+  else updateAllowances2028();
+}
+function setupAmtInput(el){
+  el.addEventListener("input", ()=>{
+    el.value = el.value.replace(/[^0-9০-৯.]/g,"");
+    refreshAll();
+  });
+  el.addEventListener("focus", ()=>{ el.select(); });
+  el.addEventListener("blur", ()=>{
+    if(el.value.trim()==="" || isNaN(parseFloat(bnToEnDigits(el.value)))) el.value = "0";
+    refreshAll();
+  });
+}
+(function buildDeductionFields(){
+  const wrap = document.getElementById("dedFields");
+  const dedGroups = [
+    {t:"সঞ্চয় ও কল্যাণ কর্তন", i:"🏦", c:"", ids:["ded_gpfJoma","ded_gpfKortan","ded_kollan","ded_beni"]},
+    {t:"বাসা ভাড়া ও ইউটিলিটি বিল", i:"🏠", c:"purple", ids:["ded_basha","ded_gas","ded_bidyut","ded_pani"]},
+    {t:"ঋণ ও অন্যান্য কর্তন", i:"💳", c:"accent", ids:["ded_home","ded_car","ded_computer","ded_wazi","ded_stamp"]}
+  ];
+  const bodyOf = {};
+  dedGroups.forEach(g=>{
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = '<div class="card-title '+g.c+'"><span class="title-icon">'+g.i+'</span> '+g.t+'</div><div class="ded-body"></div>';
+    wrap.appendChild(card);
+    const body = card.querySelector(".ded-body");
+    g.ids.forEach(id=>{ bodyOf[id] = body; });
+  });
+  dedItems.forEach(d=>{
+    const row = document.createElement("div");
+    row.className = "toggle-row";
+    row.innerHTML = '<div class="toggle-label"><span>'+d[2]+'</span> '+d[1]+'</div>'+
+      '<input type="text" inputmode="decimal" class="amt-input" id="'+d[0]+'" value="0" placeholder="০" autocomplete="off">';
+    if(d[0] === "ded_basha") row.querySelector(".toggle-label").insertAdjacentHTML("beforeend", " <small>(৩০-০৬-২০২৬ এর মূলবেতনের ৫% অটো)</small>");
+    bodyOf[d[0]].appendChild(row);
+    setupAmtInput(row.querySelector("input"));
+  });
+  setupAmtInput(document.getElementById("mileageInput"));
+})();
+
 function renderAllowanceList(allowances, total){
+  updateMileageUI();
+  const mileage = mileageTotal();
+  allowances.push({icon:"🛣️", name:"মাইলেজ", detail: mileageCalc().detail, amount: mileage});
+  total += mileage;
+  const totalDed = dedTotal();
+  document.getElementById("totalDeductionBadge").textContent = taka(totalDed) || "৳০";
+  document.getElementById("remainingBadge").textContent = taka(total - totalDed) || "৳০";
   const listEl = document.getElementById("allowanceList");
   listEl.innerHTML = "";
   allowances.forEach(a=>{
@@ -1105,6 +1459,8 @@ function renderAllowanceList(allowances, total){
 
 /* ============ ধাপভিত্তিক হিসাব ============ */
 function renderStepTotals2026(step1Total, step2Total, step3Total, nextHigherValue, incrementVal, raise, val2, total, finalIncrement){
+  const _gross = total + mileageTotal(); // মোট ভাতা (মাইলেজসহ)
+  total = total + netAdj(); // অবশিষ্ট = (ভাতা + মাইলেজ) − কর্তন
   const c1 = document.querySelector(".step-total-card.step1");
   const c2 = document.querySelector(".step-total-card.step2");
   const c3 = document.querySelector(".step-total-card.step3");
@@ -1135,6 +1491,9 @@ function renderStepTotals2026(step1Total, step2Total, step3Total, nextHigherValu
     step3Final = Math.round(raise * 25 / 100) + step2Final;
   }
 
+  dashState = {mode:"2026", basics:[step1Final, step2Final, finalIncrement], allow:_gross, ded:dedTotal()};
+  updateDashboard();
+
   // ১ম ধাপ বেতন = মোট ভাতা + ১ম ধাপ
   const outS1 = (!isNaN(step1Final)) ? step1Final + total : NaN;
   document.getElementById("outStep1Total").textContent = isNaN(outS1) ? "৳০" : taka(outS1);
@@ -1152,6 +1511,10 @@ function renderStepTotals2026(step1Total, step2Total, step3Total, nextHigherValu
 }
 
 function renderStepTotals2028(scaleValue, total){
+  const _gross = total + mileageTotal(); // মোট ভাতা (মাইলেজসহ)
+  total = total + netAdj(); // অবশিষ্ট = (ভাতা + মাইলেজ) − কর্তন
+  dashState = {mode:"2028", basics:[scaleValue], allow:_gross, ded:dedTotal()};
+  updateDashboard();
   const step1Card = document.querySelector(".step-total-card.step1");
   const step2Card = document.querySelector(".step-total-card.step2");
   const step3Card = document.querySelector(".step-total-card.step3");
@@ -1193,7 +1556,13 @@ function onHouseTypeChange2028(){
   }
 }
 
+function syncModeView(){
+  const is2026 = document.getElementById("yearMode").value === "2026";
+  document.getElementById("card2026_result").classList.toggle("hidden-section", !is2026);
+  document.getElementById("summary2028Note").classList.toggle("hidden-section", is2026);
+}
 function onYearModeChange(){
+  syncModeView();
   const mode = document.getElementById("yearMode").value;
   const mode2026 = document.getElementById("mode2026");
   const mode2028 = document.getElementById("mode2028");
@@ -1233,6 +1602,107 @@ function onGradeChange(){
   updateOutputs2026();
 }
 
+/* ============ ড্যাশবোর্ড ============ */
+let dashStep = 0, dashState = null, dashChipsMode = "";
+const stepChipDefs = [
+  {t:"১ম ধাপ", d:"জুলাই–ডিসে ২৬", full:"০১-০৭-২০২৬ হতে ৩১-১২-২০২৬"},
+  {t:"২য় ধাপ", d:"জানু–জুন ২৭", full:"০১-০১-২০২৭ হতে ৩০-০৬-২০২৭"},
+  {t:"৩য় ধাপ", d:"জুলাই ২৭ হতে", full:"০১-০৭-২০২৭ হতে"}
+];
+const chipDefs2028 = [{t:"পে-স্কেল ২০২৬", d:"০১-০১-২০২৮ হতে", full:"০১-০১-২০২৮ হতে"}];
+function currentChipDefs(){ return dashChipsMode === "2028" ? chipDefs2028 : stepChipDefs; }
+function buildChips(mode){
+  const box = document.getElementById("dbChips");
+  box.innerHTML = "";
+  dashChipsMode = mode;
+  currentChipDefs().forEach((c,i)=>{
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.title = c.full;
+    b.innerHTML = '<span class="c1">'+c.t+'</span><span class="c2">'+c.d+'</span>';
+    b.addEventListener("click", ()=>{ dashStep = i; updateDashboard(); });
+    box.appendChild(b);
+  });
+}
+function animateNum(el, to){
+  const from = (el._v === undefined) ? 0 : el._v;
+  el._v = to;
+  cancelAnimationFrame(el._raf);
+  if(from === to){ el.textContent = taka(to) || "৳০"; return; }
+  const t0 = performance.now(), dur = 350;
+  function f(now){
+    const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    el.textContent = taka(from + (to - from) * e) || "৳০";
+    if(p < 1) el._raf = requestAnimationFrame(f);
+  }
+  el._raf = requestAnimationFrame(f);
+}
+function updateDashboard(){
+  if(!dashState) return;
+  if(dashChipsMode !== dashState.mode){ buildChips(dashState.mode); dashStep = 0; }
+  const idx = Math.min(dashStep, dashState.basics.length - 1);
+  document.querySelectorAll("#dbChips .chip").forEach((c,i)=>c.classList.toggle("active", i === idx));
+  document.getElementById("dbPeriod").textContent = currentChipDefs()[idx].full;
+  const b = dashState.basics[idx], basic = isNaN(b) ? 0 : b;
+  const allow = dashState.allow || 0, ded = dashState.ded || 0;
+  animateNum(document.getElementById("dbBasic"), basic);
+  animateNum(document.getElementById("dbAllow"), allow);
+  animateNum(document.getElementById("dbDed"), ded);
+  animateNum(document.getElementById("dbTotal"), basic + allow - ded);
+}
+
+/* ============ পেজ নেভিগেশন (ট্যাব + সোয়াইপ) ============ */
+(function initPager(){
+  const pages = Array.from(document.querySelectorAll(".page"));
+  const tabs = Array.from(document.querySelectorAll("#tabs .tab"));
+  const dotsBox = document.getElementById("pagerDots");
+  const prevBtn = document.getElementById("prevPage");
+  const nextBtn = document.getElementById("nextPage");
+  let cur = 0;
+  pages.forEach(()=>dotsBox.appendChild(document.createElement("i")));
+  function showPage(n, dir){
+    n = Math.max(0, Math.min(pages.length - 1, n));
+    if(n === cur && pages[n].classList.contains("active") && !pages[n].classList.contains("from-right") && !pages[n].classList.contains("from-left") && dir === undefined) return;
+    if(n === cur && dir === undefined) return;
+    const d = dir || (n > cur ? 1 : -1);
+    pages.forEach((p,i)=>{
+      p.classList.remove("active","from-right","from-left");
+      if(i === n) p.classList.add("active", d > 0 ? "from-right" : "from-left");
+    });
+    tabs.forEach((t,i)=>{ t.classList.toggle("active", i === n); t.setAttribute("aria-selected", i === n); });
+    Array.from(dotsBox.children).forEach((x,i)=>x.classList.toggle("on", i === n));
+    prevBtn.disabled = (n === 0);
+    nextBtn.disabled = (n === pages.length - 1);
+    cur = n;
+    tabs[n].scrollIntoView({inline:"center", block:"nearest", behavior:"smooth"});
+    const tb = document.getElementById("tabbar");
+    const top = document.getElementById("pages").getBoundingClientRect().top + window.scrollY - tb.offsetHeight - 8;
+    if(window.scrollY > top) window.scrollTo({top: top, behavior:"smooth"});
+  }
+  tabs.forEach((t,i)=>t.addEventListener("click", ()=>showPage(i)));
+  prevBtn.addEventListener("click", ()=>showPage(cur - 1));
+  nextBtn.addEventListener("click", ()=>showPage(cur + 1));
+  // সোয়াইপ
+  let sx = 0, sy = 0, tracking = false;
+  const area = document.querySelector(".container");
+  area.addEventListener("touchstart", e=>{
+    if(e.touches.length !== 1){ tracking = false; return; }
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; tracking = true;
+  }, {passive:true});
+  area.addEventListener("touchend", e=>{
+    if(!tracking) return;
+    tracking = false;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - sx, dy = t.clientY - sy;
+    if(Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6){
+      if(dx < 0) showPage(cur + 1); else showPage(cur - 1);
+    }
+  }, {passive:true});
+  // শুরুতে ১ম পেজ
+  pages.forEach((p,i)=>p.classList.toggle("active", i === 0));
+  Array.from(dotsBox.children).forEach((x,i)=>x.classList.toggle("on", i === 0));
+  prevBtn.disabled = true;
+})();
+
 fillSelect("list1", list1);
 fillSelect("list4", list4_2026);
 fillSelect("list4_2028", list4_2028);
@@ -1242,6 +1712,16 @@ fillSelect("list2028_grade", list2028_grades);
   const gradeIdx = parseInt(document.getElementById("list2028_grade").value,10);
   const scaleSteps = list3Steps[gradeIdx] || [];
   fillSelect("list2028_scale", scaleSteps, true);
+})();
+
+document.getElementById("mileageRole").addEventListener("change", refreshAll);
+
+/* প্রতিটি কার্ডে আলাদা রঙের চিকন বর্ডার */
+(function colorCards(){
+  const colors = ["#3b82f6","#f59e0b","#10b981","#8b5cf6","#ef4444","#14b8a6","#ec4899"];
+  document.querySelectorAll(".page").forEach(pg=>{
+    pg.querySelectorAll(".card").forEach((c,i)=>{ c.style.setProperty("--bc", colors[i % colors.length]); });
+  });
 })();
 
 document.getElementById("list1").addEventListener("change", onGradeChange);
