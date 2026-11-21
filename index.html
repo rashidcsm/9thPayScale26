@@ -729,7 +729,7 @@
         <div class="toggle-row">
           <div class="toggle-label">টিফিন ভাতা</div>
           <select id="listTiffin2028" style="max-width:200px;">
-            <option value="no">প্রতিষ্ঠান থেকে টিফিন দেয় না</option>
+            <option value="no">টিফিন দেয় না</option>
             <option value="yes">প্রতিষ্ঠান থেকে টিফিন দেয়</option>
           </select>
         </div>
@@ -1344,14 +1344,14 @@ const dedItems = [
   ["ded_gpfJoma","জিপিএফ জমা","💰"],["ded_gpfKortan","জিপিএফ কর্তন","🏦"],
   ["ded_basha","বাসা ভাড়া (সিঙ্গেল)","🏠"],["ded_gas","গ্যাস বিল","🔥"],
   ["ded_bidyut","বিদ্যুৎ বিল","💡"],["ded_pani","পানি বিল","🚰"],
-  ["ded_kollan","কল্যাণ ট্রাস্ট","🤝"],["ded_beni","বেনিভোলেন্ট কর্তন","🏥"],
+  ["ded_kollan","কল্যাণ ট্যাক্স","🤝"],["ded_beni","বেনিভোলেন্ট কর্তন","🏥"],
   ["ded_home","হোম লোন","🏡"],["ded_car","কার লোন","🚗"],
   ["ded_computer","কম্পিউটার লোন","💻"],["ded_wazi","ওয়াজিউল্লাহ ইন্সটিটিউট কর্তন","🏛️"],
   ["ded_stamp","স্ট্যাম্প ফি","🔖"]
 ];
 function dedTotal(){ return dedItems.reduce((s,d)=>s+numVal(d[0]),0); }
 function netAdj(){ return mileageTotal() - dedTotal(); }
-/* মাইলেজ: লোকো মাস্টার = ১০০%, ট্রেন পরিচালক/ট্রাভেলিং টিকেট এক্সামিনার = ৭৫% + (৩০-০৬-২০২৬ এর মূলবেতন ÷ ৩০) */
+/* মাইলেজ: লোকো মাস্টার ১০০%, অন্যরা ৭৫%: মাইলেজ × % ÷ ১০০ × (২য় লিস্টের মান) ÷ গত মাসের দিন */
 function basic2026(){
   const i1 = parseInt(document.getElementById("list1").value,10);
   const i2 = parseInt(document.getElementById("list2").value,10);
@@ -1363,10 +1363,12 @@ function mileageCalc(){
   const b = basic2026();
   if(role === "none" || v <= 0 || isNaN(b)) return {total:0, detail:"প্রযোজ্য নয়", note:"পদ নির্বাচন করে মাইলেজ লিখলে হিসাব দেখাবে।"};
   const pct = (role === "loco") ? 100 : 75;
-  const p1 = v * pct / 100, p2 = b / 30;
-  const total = Math.round(p1 + p2);
-  const txt = enToBnDigits(pct)+"% × "+enToBnDigits(v)+" = "+enToBnDigits(Math.round(p1*100)/100)+"  +  "+enToBnDigits(b)+" ÷ ৩০ = "+enToBnDigits(Math.round(p2*100)/100);
-  return {total, detail: enToBnDigits(pct)+"% × "+enToBnDigits(v)+" + "+enToBnDigits(b)+"÷৩০", note: txt};
+  const now = new Date();
+  const days = new Date(now.getFullYear(), now.getMonth(), 0).getDate(); // পূর্ববর্তী মাসের দিন সংখ্যা
+  const p1 = v * pct / 100 / 100; // মাইলেজ × % ÷ ১০০
+  const total = Math.round(p1 * b / days);
+  const txt = enToBnDigits(v)+" × "+enToBnDigits(pct)+"% ÷ ১০০ = "+enToBnDigits(Math.round(p1*100)/100)+"  →  "+enToBnDigits(Math.round(p1*100)/100)+" × "+enToBnDigits(b)+" ÷ "+enToBnDigits(days)+" (গত মাসের দিন) = "+enToBnDigits(total);
+  return {total, detail: enToBnDigits(v)+" × "+enToBnDigits(pct)+"% ÷ ১০০ × "+enToBnDigits(b)+" ÷ "+enToBnDigits(days), note: txt};
 }
 function mileageTotal(){ return mileageCalc().total; }
 function updateMileageUI(){
