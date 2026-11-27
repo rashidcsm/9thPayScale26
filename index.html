@@ -979,6 +979,14 @@ function extractNumber(str){ const en = bnToEnDigits(str||""); const m = en.matc
 const ordinalSuffix = { 1:"ম", 2:"য়", 3:"য়", 4:"র্থ", 5:"ম", 6:"ষ্ঠ", 7:"ম", 8:"ম", 9:"ম", 10:"ম" };
 function bnOrdinal(n){ if(n<=10) return enToBnDigits(n)+ordinalSuffix[n]; return enToBnDigits(n)+"তম"; }
 function taka(n){ return isNaN(n) ? "" : "৳"+enToBnDigits(Math.round(n)); }
+/* দশমিকের পর ২ ঘর পর্যন্ত দেখানোর ফাংশন */
+function fmt2(n){ return isNaN(n) ? "" : enToBnDigits((Math.round(n*100)/100).toFixed(2)); }
+function taka2(n){ return isNaN(n) ? "" : "৳"+fmt2(n); }
+function takaSmart(n){
+  if(isNaN(n)) return "";
+  const r = Math.round(n*100)/100;
+  return Number.isInteger(r) ? taka(r) : taka2(r);
+}
 function fillSelect(id, arr, withStep){
   const sel = document.getElementById(id);
   sel.innerHTML = "";
@@ -1103,45 +1111,37 @@ function updateOutputs2026(){
     (enToBnDigits(nextHigherValue)+" − "+enToBnDigits(val2)+" = "+taka(raise));
 
   const stepDiff = (!isNaN(incrementValue) && !isNaN(nextHigherValue)) ? incrementValue - nextHigherValue : NaN;
+  const q50 = raise * 50 / 100;
+  const q25 = raise * 25 / 100;
 
-  // ১ম ধাপ (মূল হিসাব) = (raise × 50%) + val2 + (incrementValue − nextHigherValue)
+  // ১ম ধাপ = (raise × 50%) + val2 + (incrementValue − nextHigherValue)  [দশমিকসহ]
   let step1Total = NaN;
   if(!isNaN(raise) && !isNaN(val2) && !isNaN(stepDiff)){
-    step1Total = Math.round(raise * 50 / 100) + val2 + stepDiff;
-    const p1 = Math.round(raise * 50 / 100);
+    step1Total = q50 + val2 + stepDiff;
     document.getElementById("outHalfYear").textContent =
-      enToBnDigits(p1)+" + "+enToBnDigits(val2)+" + "+enToBnDigits(stepDiff)+" = "+taka(step1Total);
+      fmt2(q50)+" + "+fmt2(val2)+" + "+fmt2(stepDiff)+" = "+taka2(step1Total);
   } else document.getElementById("outHalfYear").textContent = "—";
 
   // ২য় ধাপ = (raise × 25%) + ১ম ধাপ
   let step2Total = NaN;
   if(!isNaN(step1Total) && !isNaN(raise)){
-    step2Total = Math.round(raise * 25 / 100) + step1Total;
+    step2Total = q25 + step1Total;
     document.getElementById("outNextHalf").textContent =
-      enToBnDigits(Math.round(raise*25/100))+" + "+enToBnDigits(step1Total)+" = "+taka(step2Total);
+      fmt2(q25)+" + "+fmt2(step1Total)+" = "+taka2(step2Total);
   } else document.getElementById("outNextHalf").textContent = "—";
 
   // ৩য় ধাপ = (raise × 25%) + ২য় ধাপ
   let step3Total = NaN;
   if(!isNaN(step2Total) && !isNaN(raise)){
-    step3Total = Math.round(raise * 25 / 100) + step2Total;
+    step3Total = q25 + step2Total;
     document.getElementById("outSum2").textContent =
-      enToBnDigits(Math.round(raise*25/100))+" + "+enToBnDigits(step2Total)+" = "+taka(step3Total);
+      fmt2(q25)+" + "+fmt2(step2Total)+" = "+taka2(step3Total);
   } else document.getElementById("outSum2").textContent = "—";
 
-  // ০১-০৭-২০২৭ ইনক্রিমেন্টসহ মূলবেতন = ৩য় ধাপের পরবর্তী উচ্চতর ধাপ
+  // ০১-০৭-২০২৭ ইনক্রিমেন্টসহ মূলবেতন = "ইনক্রিমেন্টসহ ০১-০৭-২০২৬ মূলবেতন" এর ঠিক এক ধাপ উপরের ধাপ
   let finalIncrement = NaN;
-  if(!isNaN(step3Total)&&steps3.length){
-    let idx2 = -1;
-    const exactIdx2 = steps3.findIndex(s=>extractNumber(s)===step3Total);
-    if(exactIdx2!==-1) idx2 = exactIdx2;
-    else{
-      const larger2 = steps3.map((s,idx)=>({s,n:extractNumber(s),idx}))
-        .filter(o=>o.n>step3Total).sort((a,b)=>a.n-b.n);
-      idx2 = larger2.length ? larger2[0].idx : steps3.length-1;
-    }
-    const stepAbove = steps3[idx2+1]!==undefined ? steps3[idx2+1] : steps3[idx2];
-    finalIncrement = extractNumber(stepAbove);
+  if(currentIdx !== -1 && steps3.length){
+    finalIncrement = extractNumber(steps3[Math.min(currentIdx + 2, steps3.length - 1)]);
   }
   document.getElementById("outIncrement").textContent = taka(finalIncrement) || "—";
 
@@ -1475,22 +1475,22 @@ function renderStepTotals2026(step1Total, step2Total, step3Total, nextHigherValu
 
   const stepDiff = (!isNaN(incrementVal) && !isNaN(nextHigherValue)) ? incrementVal - nextHigherValue : NaN;
 
-  // ১ম ধাপ (মূল হিসাব)
+  // ১ম ধাপ (দশমিকসহ)
   let step1Final = NaN;
   if(!isNaN(raise) && !isNaN(val2) && !isNaN(stepDiff)){
-    step1Final = Math.round(raise * 50 / 100) + val2 + stepDiff;
+    step1Final = (raise * 50 / 100) + val2 + stepDiff;
   }
 
   // ২য় ধাপ
   let step2Final = NaN;
   if(!isNaN(step1Final) && !isNaN(raise)){
-    step2Final = Math.round(raise * 25 / 100) + step1Final;
+    step2Final = (raise * 25 / 100) + step1Final;
   }
 
   // ৩য় ধাপ
   let step3Final = NaN;
   if(!isNaN(step2Final) && !isNaN(raise)){
-    step3Final = Math.round(raise * 25 / 100) + step2Final;
+    step3Final = (raise * 25 / 100) + step2Final;
   }
 
   dashState = {mode:"2026", basics:[step1Final, step2Final, finalIncrement], allow:_gross, ded:dedTotal()};
@@ -1498,18 +1498,18 @@ function renderStepTotals2026(step1Total, step2Total, step3Total, nextHigherValu
 
   // ১ম ধাপ বেতন = মোট ভাতা + ১ম ধাপ
   const outS1 = (!isNaN(step1Final)) ? step1Final + total : NaN;
-  document.getElementById("outStep1Total").textContent = isNaN(outS1) ? "৳০" : taka(outS1);
+  document.getElementById("outStep1Total").textContent = isNaN(outS1) ? "৳০" : taka2(outS1);
 
   // ২য় ধাপ বেতন = মোট ভাতা + ২য় ধাপ
   const outS2 = (!isNaN(step2Final)) ? step2Final + total : NaN;
-  document.getElementById("outStep2Total").textContent = isNaN(outS2) ? "৳০" : taka(outS2);
+  document.getElementById("outStep2Total").textContent = isNaN(outS2) ? "৳০" : taka2(outS2);
 
   // ৩য় ধাপ বেতন = মোট ভাতা + ইনক্রিমেন্টসহ মূলবেতন (finalIncrement)
   const outS3 = (!isNaN(finalIncrement)) ? finalIncrement + total : NaN;
-  document.getElementById("outStep3Total").textContent = isNaN(outS3) ? "৳০" : taka(outS3);
+  document.getElementById("outStep3Total").textContent = isNaN(outS3) ? "৳০" : taka2(outS3);
 
   // ভাতাসহ মোট বেতন = মোট ভাতা + ১ম ধাপ
-  document.getElementById("grandTotalBadge").textContent = isNaN(outS1) ? "৳০" : taka(outS1);
+  document.getElementById("grandTotalBadge").textContent = isNaN(outS1) ? "৳০" : taka2(outS1);
 }
 
 function renderStepTotals2028(scaleValue, total){
@@ -1629,11 +1629,12 @@ function animateNum(el, to){
   const from = (el._v === undefined) ? 0 : el._v;
   el._v = to;
   cancelAnimationFrame(el._raf);
-  if(from === to){ el.textContent = taka(to) || "৳০"; return; }
+  if(from === to){ el.textContent = takaSmart(to) || "৳০"; return; }
   const t0 = performance.now(), dur = 350;
   function f(now){
     const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-    el.textContent = taka(from + (to - from) * e) || "৳০";
+    const v = from + (to - from) * e;
+    el.textContent = (p < 1 ? taka(v) : takaSmart(v)) || "৳০";
     if(p < 1) el._raf = requestAnimationFrame(f);
   }
   el._raf = requestAnimationFrame(f);
